@@ -16,7 +16,6 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var nib = require('nib');
 
-
 // Lint Coffeescript
 gulp.task('lint', function() {
     gulp.src('./coffee/*.coffee')
@@ -45,14 +44,16 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('dist'))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('build'));
 });
 
+/*
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['lint', 'scripts']);
     gulp.watch('scss/*.scss', ['sass']);
 });
+*/
 
 // Default Task
 gulp.task('default', ['lint', 'coffee', 'stylus', 'scripts', 'watch']);

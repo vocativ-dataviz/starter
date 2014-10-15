@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<title>Vulpes Boilerplate</title>
+	<title>Vocativ | </title>
 
 	<link rel="shortcut icon" href="/favicon.ico">
 
@@ -11,77 +11,39 @@
 	<![endif]-->
 	<link rel="stylesheet" media="all" href=""/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<!-- Adding "maximum-scale=1" fixes the Mobile Safari auto-zoom bug: http://filamentgroup.com/examples/iosScaleBug/ -->
 
-  <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" title="Primary Stylesheet" charset="utf-8">
 
   <!-- Bring in jQuery first, lots of other stuff depends on it -->
   <script src="js/jquery.js?v1.11.0" type="text/javascript" charset="utf-8"></script>
 
-  <!-- And Underscore | http://underscorejs.org/
-  <script src="js/underscore-min.js?1.6.0" type="text/javascript" charset="utf-8"></script>	-->
+  <!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference -->
+  <script src="js/d3.min.js?v3" type="text/javascript" charset="utf-8"></script> 
 
-  <!-- And D3 | https://github.com/mbostock/d3/wiki/API-Reference
-  <script src="js/d3.min.js?v3" type="text/javascript" charset="utf-8"></script> -->
+  <!-- And Pym | http://blog.apps.npr.org/pym.js/ -->
+  <script src="js/pym.js" type="text/javascript" charset="utf-8"></script> 
+
+  <!-- And Underscore | http://underscorejs.org/
+  <script src="js/underscore-min.js?v1.6.0" type="text/javascript" charset="utf-8"></script>  -->
+
+  <!-- And Tabletop
+  <script src="js/tabletop.js?v1.6.0" type="text/javascript" charset="utf-8"></script>  -->
+
 </head>
 
 <body>
 <div id="container">
+
 	<header id="title">
-		<h1>Vulpes Boilerplate</h1>
+		<h1>Vocativ Dataviz-Starter</h1>
 	</header>
 
 	<section id="content">
-		Lorem ipsum dolor sit amet, <em>consectetur adip*isicing elit</em>, sed do eiusmod *tempor incididunt ut labore et dolore magna aliqua. <strong>Cum sociis natoque</strong> penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam. <a href="#content-2">Pellentesque ornare</a> sem lacinia quam venenatis vestibulum. <strong>Morbi leo risus</strong>, porta ac consectetur ac, vestibulum at eros. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-	</section>
+		<svg id="viz-svg">
 
-	<section id="content-3">
-		<h2>Nullam Ipsum Sem</h2>
-		<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum. Donec id elit non mi porta gravida at eget metus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem ipsum dolor sit amet. <small>Consectetur adipiscing elit.</small></p>
-
-		<h3>Sit Pellentesque Tortor Tristique Vulputate</h3>
-		<p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas faucibus mollis interdum. Donec sed odio dui.</p>
-
-		<h4>Nullam volutpat, tellus at placerat</h4>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis venenatis sapien eget sapien faucibus sed pulvinar mi lacinia. Praesent quis nibh nec nibh hendrerit interdum. Integer luctus viverra nisl, ac mattis neque sagittis sed. Nulla auctor interdum purus eget semper. Vestibulum malesuada mauris ut metus bibendum bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In augue odio, elementum vel condimentum a, tempor gravida diam. Nulla ultrices erat id lorem suscipit ut fringilla ipsum condimentum. Ut ac dictum tortor. Mauris luctus sapien quis magna tristique eleifend.</p>
-
-        <p>Sed tincidunt egestas dapibus. Morbi tempus cursus mauris at ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed sit amet dignissim urna. Sed neque turpis, facilisis in dapibus ut, convallis in purus. Donec ante urna, viverra vel porttitor in, rhoncus a nisi. Fusce sit amet venenatis mauris. Integer bibendum massa magna.</p>
-
-        <p>Mauris at purus at ipsum mattis mollis iaculis id metus. Phasellus euismod consectetur erat. Sed nec arcu a quam hendrerit scelerisque. Donec neque nisl, fermentum ac sollicitudin ac, elementum ut turpis. Ut sit amet massa ullamcorper purus pharetra iaculis fermentum eu eros. Donec nulla erat, interdum ut condimentum eget, vehicula et risus. Etiam libero tellus, pretium quis egestas ut, bibendum eu orci. Nulla volutpat, urna sit amet pharetra posuere, ligula orci lobortis mi, vel consequat eros sem vitae metus.</p>
-	</section>
-
-
-	<section class="form">
-		<form action="index_submit" method="get" accept-charset="utf-8">
-			<table border="0" cellspacing="5" cellpadding="5">
-				<tr><th><label for="username">Username</label></th><td><input type="text" name="username" value="" id="username" placeholder="Username"></td></tr>
-				<tr><th><label for="email">Email</label></th><td><input type="text"  class="email" name="email" value="" id="email" placeholder="Email"></td></tr>
-			</table>
-			</form>
-			<p><button>Thing one</button> <button>Thing two</button> <button>Thing three</button><button class="small-button">Small button</button></p>
-			<p><input type="submit" value="Continue &rarr;"></p>
+    </svg>
 	</section>
 
 </div>
-
-
-
-
-
-
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function(){
-/*
-
-
-  Javascript Here
-
-
-*/
-});
-</script>
-
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-
 </body>
 </html>
