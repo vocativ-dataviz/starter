@@ -47,13 +47,11 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('build'));
 });
 
-/*
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('js/*.js', ['lint', 'scripts']);
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch('coffee/*.coffee', ['lint', 'coffee', 'scripts']);
+    gulp.watch('stylus/*.styl', ['stylus']);
 });
-*/
 
 // Default Task
 gulp.task('default', ['lint', 'coffee', 'stylus', 'scripts', 'watch']);
