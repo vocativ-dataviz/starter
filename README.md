@@ -1,6 +1,6 @@
-# Vocativ Interactive Infographic Template
+# Vocativ Interactive Dataviz Template/Starter
 
-A lightweight starting point to create websites, especially data visualization mini-sites. (That's my job!)
+A lightweight starting point to create interactive visualizations of data. Of all sorts. (Maps, charts, graphs, tools)
 
 jQuery, D3, and Underscore are included. [Stylus](http://learnboost.github.io/stylus/) is used for CSS.
 
@@ -11,3 +11,10 @@ I've focused on sane defaults (for me) and little else, so it can be the startin
 + [gulp-coffee](https://www.npmjs.org/package/gulp-coffee)
 + [gulp-coffeelint](https://www.npmjs.org/package/gulp-coffeelint)
 + [gulp-concat](https://www.npmjs.org/package/gulp-concat)
+
+## This template/starter needs to make sure the following is built-in
++ Change the URL for each 'section/step' of the interactive so back button works
++ Allow the user to link to and share specific sections/insights in the interactive
++ Pull in data from google sheets, if the reporter's data is there
++ Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'
++ Have PYM.js set up (and the structure required for that) so that the piece is easily embeddable in WordPress as a resizable iframe 
