@@ -1,13 +1,7 @@
 // Include gulp
 var gulp = require('gulp'); 
 
-// Include Our Plugins
-//var jshint = require('gulp-jshint');
-//var sass = require('gulp-sass');
-//var concat = require('gulp-concat');
-//var uglify = require('gulp-uglify');
-//var rename = require('gulp-rename');
-
+// Include gulp plugins
 var coffeelint = require('gulp-coffeelint');
 var stylus = require('gulp-stylus');
 var coffee = require('gulp-coffee');
