@@ -1,3 +1,148 @@
+/*  Color variables
+  ------------------  */
+
+$fontcolor = #333333
+$bgcolor = #e6e6e6
+
+/* Highlight color, when user selects text */
+$highlight = #FFF9A2
+
+/* Link color, hover/visited will be generated from this */
+$linkcolor = #112582
+
+/* Selection colours (easy to forget) */
+::selection     {background: $highlight}
+::-moz-selection  {background: $highlight}
+img::selection    {background: transparent}
+img::-moz-selection {background: transparent}
+body {-webkit-tap-highlight-color: $highlight}
+
+em { background: rgba($highlight, 0.5) }
+
+
+/*  Typography presets
+  ------------------  */
 body
-  color white
-  background-color red
+  font-size 100%
+  font-size 1.2em
+  line-height 1.3em
+
+.huge, h1
+  font-size: 3em
+  line-height: 1.1em
+
+.large, h2
+  font-size: 2.75em
+  line-height: 1.5em
+
+.bigger, h3
+  font-size: 2em
+  line-height: 1.5em
+  margin: 0.1em 0
+
+.big, h4
+  font-size: 1.5em
+  line-height: 1.5em
+  margin: 0.1em 0
+
+.small, small
+  opacity: 0.8
+  font-size: 0.7em
+  line-height: 1.2em
+
+
+// Font sizes for mobile
+@media only screen and (max-width: 767px)
+  .huge, h1
+      font-size: 2.5em
+      line-height: 1.1em
+      margin-bottom: 12px
+
+    .large, h2
+      font-size: 2em
+      line-height: 1.3em
+      font-weight: 800
+      line-height: 1.4em
+      margin-bottom: 6px
+
+    .bigger, h3
+      font-size: 1.75em
+      line-height: 1.2em
+      font-weight: 800
+      margin: 6px 0
+
+    .big, h4
+      font-size: 1.4em
+      line-height: 1.5em
+      font-weight: 700
+      margin: 8px 0
+
+body
+  font normal 100% "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", 'Helvetica Neue', Helvetica, Arial, sans-serif
+  line-height 1.45em
+  font-size 1.2em
+  max-width 896px
+  //width 65%
+  padding 32px 48px 84px
+  background $bgcolor
+  color $fontcolor
+  -webkit-text-size-adjust 100% /* Stops Mobile Safari from auto-adjusting font-sizes */
+  margin-left auto
+  margin-right auto
+
+p
+  margin 0.6em 0
+
+a
+  &:link
+    color $linkcolor
+
+  &:hover
+    color $linkcolor
+
+  &:visited
+    color $linkcolor
+
+section
+  margin 12px 0
+
+  &:last-child
+    margin-bottom 0
+
+
+
+
+
+
+
+
+// Tablet Layout
+@media only screen and (min-width: 768px) and (max-width: 991px)
+  body
+    max-width 712px
+    width 80%
+    font-size 1.1em
+
+
+
+
+
+
+
+
+
+// Mobile Layout
+@media only screen and (max-width: 767px)
+  body
+    padding 8px
+    margin 0
+    max-width 100%
+    width 100%
+    font-size 0.9em
+    line-height 1.5em
+
+
+
+
+
+// Buttons

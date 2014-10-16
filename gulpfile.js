@@ -9,6 +9,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var webserver = require('gulp-webserver')
+var mincss = require('gulp-minify-css')
 var nib = require('nib');
 
 // Lint Coffeescript
@@ -30,13 +31,23 @@ gulp.task('coffee', function(){
 gulp.task('stylus', function(){
     gulp.src('./stylus/*.styl')
         .pipe(stylus({use: [nib()]}))
+        /*.pipe(gulp.dest('./css/')) Un-comment to see un-minified CSS */
+        .pipe(mincss({keepBreaks: true}))        
+        .pipe(concat('style.min.css'))
         .pipe(gulp.dest('./css/'))
+})
+
+// Concat/Min CSS
+gulp.task('mincss', function(){
+    gulp.src('./css/*.css')
+
+
 })
 
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
-    gulp.watch('stylus/*.styl', ['stylus']);
+    gulp.watch('stylus/*.styl', ['stylus', 'mincss']);
 });
 
 gulp.task('webserver', function(){
@@ -52,4 +63,4 @@ gulp.task('webserver', function(){
 })
 
 // Default Task
-gulp.task('default', ['lint', 'coffee', 'stylus', 'watch', 'webserver']);
+gulp.task('default', ['lint', 'coffee', 'stylus', 'watch', 'webserver', 'mincss']);
