@@ -7,10 +7,7 @@ jQuery, D3, and Underscore are included. [Stylus](http://learnboost.github.io/st
 I've focused on sane defaults (for me) and little else, so it can be the starting point for as many projects as possible with little to no modification.
 
 ## Gulp Packages
-+ [gulp-stylus](https://www.npmjs.org/package/gulp-stylus)
-+ [gulp-coffee](https://www.npmjs.org/package/gulp-coffee)
-+ [gulp-coffeelint](https://www.npmjs.org/package/gulp-coffeelint)
-+ [gulp-concat](https://www.npmjs.org/package/gulp-concat)
+[Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
 
 ## Technologies / Libraries used
 + [Coffeescript](http://coffeescript.org/)
