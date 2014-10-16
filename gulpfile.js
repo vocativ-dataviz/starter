@@ -33,21 +33,14 @@ gulp.task('stylus', function(){
         .pipe(stylus({use: [nib()]}))
         /*.pipe(gulp.dest('./css/')) Un-comment to see un-minified CSS */
         .pipe(mincss({keepBreaks: true}))        
-        .pipe(concat('style.min.css'))
+        /*.pipe(concat('style.min.css')) */
         .pipe(gulp.dest('./css/'))
-})
-
-// Concat/Min CSS
-gulp.task('mincss', function(){
-    gulp.src('./css/*.css')
-
-
 })
 
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
-    gulp.watch('stylus/*.styl', ['stylus', 'mincss']);
+    gulp.watch('stylus/*.styl', ['stylus']);
 });
 
 gulp.task('webserver', function(){
@@ -63,4 +56,4 @@ gulp.task('webserver', function(){
 })
 
 // Default Task
-gulp.task('default', ['lint', 'coffee', 'stylus', 'watch', 'webserver', 'mincss']);
+gulp.task('default', ['lint', 'coffee', 'stylus', 'watch', 'webserver']);
