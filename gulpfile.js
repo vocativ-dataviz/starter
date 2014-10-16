@@ -8,6 +8,7 @@ var coffee = require('gulp-coffee');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var webserver = require('gulp-webserver')
 var nib = require('nib');
 
 // Lint Coffeescript
@@ -38,5 +39,17 @@ gulp.task('watch', function() {
     gulp.watch('stylus/*.styl', ['stylus']);
 });
 
+gulp.task('webserver', function(){
+    gulp.src('.')
+        .pipe(webserver({
+            host: 'localhost',
+            port: '8888',
+            fallback: 'index.html',
+            livereload: true,
+            directoryListing: false
+
+        }))
+})
+
 // Default Task
-gulp.task('default', ['lint', 'coffee', 'stylus', 'watch']);
+gulp.task('default', ['lint', 'coffee', 'stylus', 'watch', 'webserver']);

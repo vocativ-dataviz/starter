@@ -1,31 +1,33 @@
 {
   "name": "dataviz-starter",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "private": true,
   "description": "Vocativ dataviz starter/boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Vocativ/dataviz-starter.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "ejfox@vocativ.com",
   "bugs": {
     "url": "https://github.com/Vocativ/dataviz-starter/issues"
   },
   "homepage": "https://github.com/Vocativ/dataviz-starter",
   "devDependencies": {
     "gulp": "^3.8.8",
+    "stylus": "^0.49.2",
+    "nib": "^1.0.4",
+    "coffee-script": "^1.8.0",
     "gulp-stylus": "^1.3.3",
     "gulp-coffee": "^2.2.0",
     "gulp-coffeelint": "^0.4.0",
-    "gulp-concat": "^2.4.1",
-    "coffee-script": "^1.8.0",
-    "stylus": "^0.49.2",
+    "gulp-concat": "^2.4.1",    
     "gulp-uglify": "^1.0.1",
     "gulp-rename": "^1.2.0",
-    "nib": "^1.0.4"
+    "gulp-plumber": "^0.6.6",
+    "gulp-webserver": "^0.8.3"
   }
 }
