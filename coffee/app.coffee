@@ -7,7 +7,7 @@ data = null
 # Set up the pymChild, so that everytime the iframe is resized
 # the renderCallback function is called repeatedly
 # (so it needs to clear and re-render, not append)
-pymChild = new pym.Child { 
+pymChild = new pym.Child {
   renderCallback: vizData
 }
 

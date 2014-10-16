@@ -20,7 +20,8 @@ gulp.task('lint', function() {
 // Compile Coffeescript
 gulp.task('coffee', function(){
     gulp.src('./coffee/*.coffee')
-        .pipe(coffee({bare: true}).on('error', gutil.log))
+        .pipe(coffee({bare: true}))
+        .pipe(uglify())
         .pipe(gulp.dest('./js/'))
 })
 
@@ -31,21 +32,11 @@ gulp.task('stylus', function(){
         .pipe(gulp.dest('./css/'))
 })
 
-// Concatenate & Minify JS
-gulp.task('scripts', function() {
-    return gulp.src('js/*.js')
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('build'));
-});
-
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('coffee/*.coffee', ['lint', 'coffee', 'scripts']);
+    gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
     gulp.watch('stylus/*.styl', ['stylus']);
 });
 
 // Default Task
-gulp.task('default', ['lint', 'coffee', 'stylus', 'scripts', 'watch']);
+gulp.task('default', ['lint', 'coffee', 'stylus', 'watch']);
