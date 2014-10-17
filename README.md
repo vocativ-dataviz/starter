@@ -42,7 +42,7 @@ The files in **/html/** can contain mustache templates. The variables for those 
 ## To-do
 + Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
 + Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)
-+ Add [gulp-sd](https://www.npmjs.org/package/gulp-s3) and write similar deploy action to Matt's script
++ Add [gulp-s3](https://www.npmjs.org/package/gulp-s3) and write similar deploy task to [Matt's script](https://github.com/Vocativ/wp-interactive/blob/master/selfies/gulpfile.js#L159)
 ```
 gulp.task('deploy', ['gzip'], function() {
     
