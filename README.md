@@ -83,3 +83,25 @@ gulp.task('deploy', ['gzip'], function() {
 
 });
 ```
++ Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)
++ Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
+```
+Interaction Events
+
+category: Items
+action: click-interactive
+opt_label: DESCRIPTIVE-OF-CLICK
+opt_value: 1
+opt_noninteraction: false
+
+where DESCRIPTIVE-OF-CLICK = Healthcare, Employment, Schools, etc - should be text the uniquely describes the button or element clicked
+
+category: Items
+action: finished-interactive
+opt_label: DESCRIPTIVE-OF-INTERACTIVE
+opt_value: 1
+opt_noninteraction: false
+
+
+where DESCRIPTIVE-OF-INTERACTIVE = Transgender-Rights-Map, etc - should be text the uniquely describes the interactive element that user finished the interaction with
+```
