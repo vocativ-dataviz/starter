@@ -1,10 +1,21 @@
-# Vocativ Interactive Dataviz Template/Starter
+# Vocativ Dataviz Template/Starter
 
 A lightweight starting point to create interactive visualizations of data. Of all sorts. (Maps, charts, graphs, tools)
 
-jQuery, D3, and Underscore are included. [Stylus](http://learnboost.github.io/stylus/) is used for CSS.
+## Use
+First `npm install` 
 
-I've focused on sane defaults (for me) and little else, so it can be the starting point for as many projects as possible with little to no modification.
+To run **/gulpfile.js**, from the root of the project use `npm start` or `gulp`
+
+The files in **/html/** can contain mustache templates. The variables for those templates are defined in the **/gulpfile.js** file. 
+
+#### What gulpfile.js does
++ **/html/** is compiled into **/index.html**
++ **/stylus/** is compiled into **/css/**
++ **/coffee/** is compiled into **/js/**
++ **/vendor/** is compiled into **/js/vendor.js**
++ Watches all files and compiles them on change
++ Starts a local webserver at ___localhost:8888___
 
 ## Gulp Packages
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
