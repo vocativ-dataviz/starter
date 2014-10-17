@@ -48,7 +48,32 @@ vizData = ->
   console.log 'Our data!', data
 
   width = $parentEl.width() #500
-  height = $parentEl.height() #500
+  height = $parentEl.height() / 2 #500
+
+  if width > 767
+    ###########
+    # Desktop #
+    ###########
+    console.log '==> Desktop'
+    mobile = false
+    
+    margin =
+      left: 16
+      right: 16
+      top: 16
+      bottom: 16
+  else
+    ###########
+    #  Mobile #
+    ###########
+    console.log '==> Mobile'
+    mobile = true
+    
+    margin =
+      left: 16
+      right: 16
+      top: 16
+      bottom: 16
 
   svg = d3.select('#viz-svg')
 

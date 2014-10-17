@@ -3,11 +3,11 @@
 A lightweight starting point to create interactive visualizations of data. Of all sorts. (Maps, charts, graphs, tools)
 
 ## Use
-First `npm install` 
+First `npm install`
 
 To run **/gulpfile.js**, from the root of the project use `npm start` or `gulp`
 
-The files in **/html/** can contain mustache templates. The variables for those templates are defined in the **/gulpfile.js** file. 
+The files in **/html/** can contain mustache templates. The variables for those templates are defined in the **/gulpfile.js** file.
 
 #### What gulpfile.js does
 + **/html/** is compiled into **/index.html**
@@ -33,11 +33,12 @@ The files in **/html/** can contain mustache templates. The variables for those 
 ## This template/starter needs to make sure the following is built-in
 + Change the URL for each 'section/step' of the interactive so back button works
 + Allow the user to link to and share specific sections/insights in the interactive
-+ ~~Pull in data from google sheets, if the reporter's data is there~~
 + Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'
++ ~~Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)~~
++ ~~Include Vocativ house styles such as colors, buttons, and fonts~~
++ ~~Pull in data from google sheets, if the reporter's data is there~~
 + ~~Have PYM.js set up (and the structure required for that) so that the piece is easily embeddable in WordPress as a resizable iframe~~
-+ Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)
-+ Include Vocativ house styles such as colors, buttons, and fonts
+
 
 ## To-do
 + Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
@@ -45,7 +46,7 @@ The files in **/html/** can contain mustache templates. The variables for those 
 + Add [gulp-s3](https://www.npmjs.org/package/gulp-s3) and write similar deploy task to [Matt's script](https://github.com/Vocativ/wp-interactive/blob/master/selfies/gulpfile.js#L159)
 ```
 gulp.task('deploy', ['gzip'], function() {
-    
+
 
     // gutil.log('Deploying to ' + stage);
 

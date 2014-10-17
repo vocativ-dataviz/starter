@@ -1,6 +1,9 @@
 var options = {
     'org': 'Vocativ',
-    'host': 'localhost'
+    'host': 'localhost',
+    'port': 8888,
+    'projName': 'Project Name',
+    'gaCode': 'UA-XXXX-Y'
 }
 
 // Include gulp
@@ -77,8 +80,8 @@ gulp.task('watch', function() {
 gulp.task('webserver', function(){
     gulp.src('.')
         .pipe(webserver({
-            host: 'localhost',
-            port: '8888',
+            host: options.host,
+            port: options.port,
             fallback: 'index.html',
             livereload: true,
             directoryListing: false
