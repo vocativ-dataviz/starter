@@ -41,3 +41,45 @@ The files in **/html/** can contain mustache templates. The variables for those 
 
 ## To-do
 + Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
++ Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)
++ Add [gulp-sd](https://www.npmjs.org/package/gulp-s3) and write similar deploy action to Matt's script
+```
+gulp.task('deploy', ['gzip'], function() {
+    
+
+    // gutil.log('Deploying to ' + stage);
+
+    var aws;
+    try {
+        aws = {
+              'key': process.env.AWS_KEY,
+              'secret': process.env.AWS_SECRET,
+              'bucket': 'interactives'
+        };
+
+        if(!aws.key || !aws.secret) {
+            new Error('Must have both AWS_KEY and AWS_SECRET env variables set');
+        }
+    } catch(err) {
+        gutil.log('Could not parse aws keys from keys.json. Aborting deployment.'.red);
+        return;
+    }
+
+    gulp.src(['./public/**', '!./public/**/*.{js,css,gz}'], { read: false })
+        .pipe(s3(aws, {
+            uploadPath: '/interactives/' + projectName + '/',
+            headers: {
+                'Cache-Control': 'max-age=300, no-transform, public'
+            }
+        }));
+    gulp.src('./public/**/*.{js,css,gz}', { read: false })
+        .pipe(s3(aws, {
+            uploadPath: '/interactives/' + projectName + '/',
+            headers: {
+                'Cache-Control': 'max-age=300, no-transform, public',
+                'Content-Encoding': 'gzip'
+            }
+        }));
+
+});
+```
