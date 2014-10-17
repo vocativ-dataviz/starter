@@ -33,7 +33,7 @@ The files in **/html/** can contain mustache templates. The variables for those 
 ## This template/starter needs to make sure the following is built-in
 + Change the URL for each 'section/step' of the interactive so back button works
 + Allow the user to link to and share specific sections/insights in the interactive
-+ Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'
++ ~~Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'~~
 + ~~Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)~~
 + ~~Include Vocativ house styles such as colors, buttons, and fonts~~
 + ~~Pull in data from google sheets, if the reporter's data is there~~

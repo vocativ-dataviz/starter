@@ -40,7 +40,6 @@ $(window).resize ->
   vizData()
 
 vizData = ->
-
   parentEl = '#content'
   $parentEl = $(parentEl)
 
@@ -50,13 +49,14 @@ vizData = ->
   width = $parentEl.width() #500
   height = $parentEl.height() / 2 #500
 
+  # Mobile / Desktop breakpoints
   if width > 767
     ###########
     # Desktop #
     ###########
     console.log '==> Desktop'
     mobile = false
-    
+
     margin =
       left: 16
       right: 16
@@ -68,13 +68,20 @@ vizData = ->
     ###########
     console.log '==> Mobile'
     mobile = true
-    
+
     margin =
       left: 16
       right: 16
       top: 16
       bottom: 16
 
+  # Example GA interaction event
+  #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
+
+  # Example GA completion event
+  #ga 'Items', 'finished-interactive', 'INTERACTIVE--PROJECT--NAME', 1
+
+  # Basic D3 visualization skeleton
   svg = d3.select('#viz-svg')
 
   svg.attr
