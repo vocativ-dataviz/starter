@@ -40,11 +40,15 @@ $(window).resize ->
   vizData()
 
 vizData = ->
+
+  parentEl = '#content'
+  $parentEl = $(parentEl)
+
   # This assumes there is a global 'data' var with our data
   console.log 'Our data!', data
 
-  width = $('#content').width() #500
-  height = $('#content').height() #500
+  width = $parentEl.width() #500
+  height = $parentEl.height() #500
 
   svg = d3.select('#viz-svg')
 
@@ -54,9 +58,9 @@ vizData = ->
 
   svg.append('rect')
     .attr {
-      width: 50
-      height: 50
-      fill: 'black'
+      width: width-10
+      height: height-10
+      fill: 'red'
       x: 10
       y: 10
     }
