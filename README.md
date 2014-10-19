@@ -7,13 +7,27 @@ First `npm install`
 
 To run **/gulpfile.js**, from the root of the project use `npm start` or `gulp`
 
-The files in **/html/** can contain mustache templates. The variables for those templates are defined in the **/gulpfile.js** file.
+The files in **/html/** can contain mustache templates. The variables for those templates are defined in **options** var in the **/gulpfile.js** file.
+
+The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file. 
+
+```
+var options = {
+    'org': 'Vocativ',
+    'host': 'localhost',
+    'port': 8888,
+    'projName': 'Project Name',
+    'gaCode': 'UA-XXXX-Y'
+}
+```
 
 #### What gulpfile.js does
 + **/html/** is compiled into **/index.html**
-+ **/stylus/** is compiled into **/css/**
++ **/stylus/style.styl** is compiled into **/css/**
 + **/coffee/** is compiled into **/js/**
 + **/vendor/** is compiled into **/js/vendor.js**
++ Minifies CSS
++ Uglifies JS (vendor and compiled Coffeescript)
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
 

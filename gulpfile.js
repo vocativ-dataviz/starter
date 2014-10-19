@@ -36,18 +36,19 @@ gulp.task('coffee', function(){
         .pipe(coffee({bare: true}))
         .pipe(uglify())
         .pipe(filesize())
-        .pipe(gulp.dest('./js/'))
+        .pipe(gulp.dest('./build/'))
 })
 
 // Compile Stylus
 gulp.task('stylus', function(){
-    gulp.src('./stylus/*.styl')
+    gulp.src('./stylus/style.styl')
         .pipe(stylus({use: [nib()]}))
         /*.pipe(gulp.dest('./css/')) Un-comment to see un-minified CSS */
         .pipe(mincss({keepBreaks: true}))        
         .pipe(filesize())
         /*.pipe(concat('style.min.css')) Un-comment to combine CSS without Stylus require()*/
-        .pipe(gulp.dest('./css/'))
+        //.pipe(gulp.dest('./css/'))
+        .pipe(gulp.dest('./build/'))
 })
 
 // Compile mustache to HTML
@@ -56,7 +57,7 @@ gulp.task('mustache', function(){
     .pipe(concat('all.mustache'))
     .pipe(mustache(options))
     .pipe(concat('index.html'))
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest('./build/'))
 })
 
 // Concat vendor files
@@ -65,7 +66,7 @@ gulp.task('vendor', function(){
     .pipe(concat('vendor.js'))
     .pipe(uglify())
     .pipe(filesize())
-    .pipe(gulp.dest('./js/'))
+    .pipe(gulp.dest('./build/'))
 })
 
 // Watch Files For Changes
@@ -78,7 +79,7 @@ gulp.task('watch', function() {
 
 // Run local webserver at localhost:8888
 gulp.task('webserver', function(){
-    gulp.src('.')
+    gulp.src('./build/')
         .pipe(webserver({
             host: options.host,
             port: options.port,

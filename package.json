@@ -5,7 +5,7 @@
   "description": "Vocativ dataviz starter/boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp --silent"
   },
   "repository": {
     "type": "git",

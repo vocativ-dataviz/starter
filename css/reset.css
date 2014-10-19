@@ -1,7 +1,0 @@
-*{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
-html{-webkit-font-smoothing:antialiased}
-canvas,iframe,img,svg,video{max-width:100%}
-pre{white-space:pre;word-wrap:break-word}
-button,input[type=button],input[type=submit],label{cursor:pointer}
-a,abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0}
-a img{border:0}
