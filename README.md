@@ -31,6 +31,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + Uglifies JS (vendor and compiled Coffeescript)
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
++ Deploy /build/ to gh-pages with `gulp github` 
 
 ## Gulp Packages
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
@@ -57,7 +58,6 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 
 ## To-do
 + Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
-+ Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)
 + Add [gulp-s3](https://www.npmjs.org/package/gulp-s3) and write similar deploy task to [Matt's script](https://github.com/Vocativ/wp-interactive/blob/master/selfies/gulpfile.js#L159)
 ```
 gulp.task('deploy', ['gzip'], function() {
@@ -99,8 +99,9 @@ gulp.task('deploy', ['gzip'], function() {
 
 });
 ```
-+ Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)
-+ Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
++ ~~Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)~~
++ ~~Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)~~
++ ~~Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)~~
 ```
 Interaction Events
 

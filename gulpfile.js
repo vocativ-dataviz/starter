@@ -22,6 +22,7 @@ var gutil = require('gulp-util');
 var filesize = require('gulp-filesize');
 var mustache = require('gulp-mustache');
 var nib = require('nib');
+var github = require('gulp-gh-pages')
 
 // Lint Coffeescript
 gulp.task('lint', function() {
@@ -76,6 +77,12 @@ gulp.task('watch', function() {
     gulp.watch('html/*', ['mustache'])
     gulp.watch('vendor/*', ['vendor'])
 });
+
+// Deploy to gh-pages with `gulp github`
+gulp.task('github', function() {
+    gulp.src('./build/')
+    .pipe(github())
+})
 
 // Run local webserver at localhost:8888
 gulp.task('webserver', function(){
