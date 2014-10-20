@@ -7,7 +7,7 @@ var options = {
 }
 
 // Include gulp
-var gulp = require('gulp'); 
+var gulp = require('gulp');
 
 // Include gulp plugins
 var coffeelint = require('gulp-coffeelint');
@@ -45,7 +45,7 @@ gulp.task('stylus', function(){
     gulp.src('./stylus/style.styl')
         .pipe(stylus({use: [nib()]}))
         /*.pipe(gulp.dest('./css/')) Un-comment to see un-minified CSS */
-        .pipe(mincss({keepBreaks: true}))        
+        .pipe(mincss({keepBreaks: true}))
         .pipe(filesize())
         /*.pipe(concat('style.min.css')) Un-comment to combine CSS without Stylus require()*/
         //.pipe(gulp.dest('./css/'))
@@ -70,6 +70,13 @@ gulp.task('vendor', function(){
     .pipe(gulp.dest('./build/'))
 })
 
+// Move data to build
+gulp.task('data', function(){
+    gulp.src('./data/*.csv', './data/*.json')
+    .pipe(filesize())
+    .pipe(gulp.dest('./build/data/'))
+})
+
 // Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
@@ -90,7 +97,7 @@ gulp.task('webserver', function(){
         .pipe(webserver({
             host: options.host,
             port: options.port,
-            fallback: 'index.html',
+            fallback: 'build/index.html',
             livereload: true,
             directoryListing: false
 
@@ -98,4 +105,4 @@ gulp.task('webserver', function(){
 })
 
 // Default Task
-gulp.task('default', ['lint', 'coffee', 'stylus', 'vendor', 'watch', 'mustache', 'webserver']);
+gulp.task('default', ['lint', 'coffee', 'stylus', 'vendor', 'watch', 'mustache', 'webserver', 'data']);
