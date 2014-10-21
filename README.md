@@ -19,7 +19,7 @@ var options = {
 }
 ```
 
-The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file. 
+The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file.
 
 
 #### What gulpfile.js does
@@ -31,7 +31,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + Uglifies JS (vendor and compiled Coffeescript)
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
-+ Deploy /build/ to gh-pages with `gulp github` 
++ Deploy /build/ to gh-pages with `gulp github`
 
 ## Gulp Packages
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
@@ -57,6 +57,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 
 
 ## To-do
++ Add [gulp-json-lint](https://www.npmjs.org/package/gulp-json-lint)
 + Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
 + Add [gulp-s3](https://www.npmjs.org/package/gulp-s3) and write similar deploy task to [Matt's script](https://github.com/Vocativ/wp-interactive/blob/master/selfies/gulpfile.js#L159)
 ```
