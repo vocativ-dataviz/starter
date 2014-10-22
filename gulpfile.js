@@ -5,7 +5,12 @@ var options = {
     'host': 'localhost',
     'port': 8888,
     'projName': 'Project Name',
-    'gaCode': 'UA-XXXX-Y'
+    'gaCode': 'UA-XXXX-Y',
+    'aws': {
+      'key': process.env.AWS_KEY,
+      'secret': process.env.AWS_SECRET,
+      'bucket': 'interactives'
+    }
 };
 
 // Include gulp
@@ -129,29 +134,15 @@ gulp.task('gzip', ['build'], function() {
 
 // Deploy to S3 in the CloudFront context
 gulp.task('deploy', ['gzip'], function() {
-    var aws;
-    try {
-        aws = {
-            'key': process.env.AWS_KEY,
-            'secret': process.env.AWS_SECRET,
-            'bucket': 'interactives'
-        };
-        if (!aws.key || !aws.secret) {
-            new Error('Must have both AWS_KEY and AWS_SECRET env variables set');
-        }
-    } catch (err) {
-        gutil.log('Could not parse aws keys from keys.json. Aborting deployment.'.red);
-        return;
-    }
     gulp.src(['./build/**', '!./build/**/*.{js,css,gz}'], {read: false})
-        .pipe(s3(aws, {
+        .pipe(s3(options.aws, {
             uploadPath: '/interactives/' + projectName + '/',
             headers: {
                 'Cache-Control': 'max-age=300, no-transform, public'
             }
         }));
     gulp.src('./build/**/*.{js,css,gz}', {read: false})
-        .pipe(s3(aws, {
+        .pipe(s3(options.aws, {
             uploadPath: '/interactives/' + projectName + '/',
             headers: {
                 'Cache-Control': 'max-age=300, no-transform, public',
