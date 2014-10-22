@@ -1,22 +1,8 @@
 'use strict';
 
-var options = {
-    'org': 'Vocativ',
-    'host': 'localhost',
-    'port': 8888,
-    'projName': 'Project Name',
-    'gaCode': 'UA-XXXX-Y',
-    'aws': {
-      'key': process.env.AWS_KEY,
-      'secret': process.env.AWS_SECRET,
-      'bucket': 'interactives'
-    }
-};
-
-// Include gulp
 var gulp = require('gulp');
 
-// Include gulp plugins
+// plugins
 var coffeelint = require('gulp-coffeelint');
 var stylus = require('gulp-stylus');
 var coffee = require('gulp-coffee');
@@ -27,7 +13,7 @@ var webserver = require('gulp-webserver');
 var mincss = require('gulp-minify-css');
 var util = require('gulp-util');
 var filesize = require('gulp-filesize');
-var mustache = require('gulp-mustache');
+var mustache = require('gulp-mustache-plus');
 var nib = require('nib');
 var github = require('gulp-gh-pages');
 var s3 = require('gulp-s3');
@@ -35,7 +21,9 @@ var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
 var htmlmin = require('gulp-htmlmin');
 
-// Lint CoffeeScript
+// options
+var options = require('./options');
+
 gulp.task('lint', function() {
     return gulp
         .src('./coffee/*.coffee')
@@ -43,7 +31,6 @@ gulp.task('lint', function() {
         .pipe(coffeelint.reporter());
 });
 
-// Compile CoffeeScript
 gulp.task('coffee', function() {
     return gulp
         .src('./coffee/*.coffee')
@@ -53,7 +40,6 @@ gulp.task('coffee', function() {
         .pipe(gulp.dest('./build/'));
 });
 
-// Compile Stylus
 gulp.task('stylus', function() {
     return gulp
         .src('./stylus/style.styl')
@@ -66,13 +52,17 @@ gulp.task('stylus', function() {
         .pipe(gulp.dest('./build/'));
 });
 
-// Compile Mustache to HTML
 gulp.task('mustache', function() {
     return gulp
-        .src(['./html/header.html', './html/body.html', './html/footer.html'])
-        .pipe(concat('index.mustache'))
-        .pipe(mustache(options))
-        .pipe(concat('index.html'))
+        .src(['./mustache/*.mustache'])
+        .pipe(mustache(options, {}, {
+          'header': './mustache/partials/header.mustache',
+          'body': './mustache/partials/body.mustache',
+          'footer': './mustache/partials/footer.mustache'
+        }))
+        .pipe(rename({
+            extname: '.html'
+        }))
         .pipe(htmlmin({
             collapseWhitespace: true,
             collapseBooleanAttributes: true,
@@ -85,17 +75,15 @@ gulp.task('mustache', function() {
         .pipe(gulp.dest('./build/'));
 });
 
-// Concat vendor files
-gulp.task('vendor', function() {
+gulp.task('js', function() {
     return gulp
-        .src('./vendor/*.js')
-        .pipe(concat('vendor.js'))
+        .src('./lib/*.js')
+        .pipe(concat('lib.js'))
         .pipe(uglify())
         .pipe(filesize())
         .pipe(gulp.dest('./build/'));
 });
 
-// Move data to build
 gulp.task('data', function() {
     return gulp
         .src('./data/*.csv', './data/*.json')
@@ -103,7 +91,6 @@ gulp.task('data', function() {
         .pipe(gulp.dest('./build/data/'));
 });
 
-// Watch Files For Changes
 gulp.task('watch', function() {
     gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
     gulp.watch('stylus/*.styl', ['stylus']);
@@ -111,58 +98,48 @@ gulp.task('watch', function() {
     gulp.watch('vendor/*', ['vendor']);
 });
 
-// Deploy to gh-pages with `gulp github`
-gulp.task('github', function() {
-    return gulp
-        .src('./build/')
-        .pipe(github());
-});
-
-// Run local webserver at localhost:8888
 gulp.task('webserver', function() {
     return gulp
         .src('./build/')
         .pipe(webserver({
-            host: options.host,
-            port: options.port,
+            host: options.website.host,
+            port: options.website.port,
             fallback: 'build/index.html',
             livereload: true,
             directoryListing: false
         }));
 });
 
-gulp.task('build', ['lint', 'coffee', 'stylus', 'vendor', 'watch', 'mustache', 'data'], function() {
+gulp.task('build', ['lint', 'coffee', 'stylus', 'js', 'watch', 'mustache', 'data'], function() {
     return gulp;
 });
 
 gulp.task('gzip', ['build'], function() {
     return gulp
-        .src('build/**/*.{js,css}')
+        .src('build/**/*.{html,js,css}')
         .pipe(gzip())
-        .pipe(rename(function(path) {
-            path.extname = '';
+        .pipe(rename({
+            extname: ''
         }))
         .pipe(gulp.dest('./build/'));
 });
 
-// Deploy to S3 in the CloudFront context
 gulp.task('deploy', ['gzip'], function() {
-    gulp.src(['./build/**', '!./build/**/*.{js,css,gz}'], {read: false})
+    gulp.src(['./build/**', '!./build/**/*.{html,js,css}'], {read: false})
         .pipe(s3(options.aws, {
-            uploadPath: '/interactives/' + options.projName + '/',
+            uploadPath: options.aws.path + '/' + options.project.slug + '/',
             headers: {
-                'Cache-Control': 'max-age=300, no-transform, public'
+                'Cache-Control': 'max-age=' + options.aws.maxAge + ', no-transform, public'
             }
         }));
-    gulp.src('./build/**/*.{js,css,gz}', {read: false})
+    gulp.src('./build/**/*.{html,js,css}', {read: false})
         .pipe(s3(options.aws, {
-            uploadPath: '/interactives/' + options.projName + '/',
+            uploadPath: options.aws.path + '/' + options.project.slug + '/',
             headers: {
-                'Cache-Control': 'max-age=300, no-transform, public',
+                'Cache-Control': 'max-age=' + options.aws.maxAge + ', no-transform, public',
                 'Content-Encoding': 'gzip'
             }
         }));
 });
 
-// Default Task
 gulp.task('default', ['deploy', 'webserver']);
