@@ -15,7 +15,12 @@ var options = {
     'host': 'localhost',
     'port': 8888,
     'projName': 'Project Name',
-    'gaCode': 'UA-XXXX-Y'
+    'gaCode': 'UA-XXXX-Y',
+    'aws': {
+        'key': process.env.AWS_KEY,
+        'secret': process.env.AWS_SECRET,
+        'bucket': 'interactives'
+    }
 }
 ```
 
@@ -28,7 +33,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + **/coffee/** is compiled into **/build/**
 + **/vendor/** is compiled into **/build/vendor.js**
 + Minifies CSS
-+ Uglifies JS (vendor and compiled Coffeescript)
++ Uglifies JS (vendor and compiled CoffeeScript)
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
 + Deploy /build/ to gh-pages with `gulp github`
@@ -37,7 +42,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
 
 ## Technologies / Libraries used
-+ [Coffeescript](http://coffeescript.org/)
++ [CoffeeScript](http://coffeescript.org/)
 + [Stylus](http://learnboost.github.io/stylus/)
 + [D3](http://d3js.org/)
 + [jQuery](http://jquery.com/)
@@ -59,47 +64,6 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 ## To-do
 + Add [gulp-json-lint](https://www.npmjs.org/package/gulp-json-lint)
 + Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
-+ Add [gulp-s3](https://www.npmjs.org/package/gulp-s3) and write similar deploy task to [Matt's script](https://github.com/Vocativ/wp-interactive/blob/master/selfies/gulpfile.js#L159)
-```
-gulp.task('deploy', ['gzip'], function() {
-
-
-    // gutil.log('Deploying to ' + stage);
-
-    var aws;
-    try {
-        aws = {
-              'key': process.env.AWS_KEY,
-              'secret': process.env.AWS_SECRET,
-              'bucket': 'interactives'
-        };
-
-        if(!aws.key || !aws.secret) {
-            new Error('Must have both AWS_KEY and AWS_SECRET env variables set');
-        }
-    } catch(err) {
-        gutil.log('Could not parse aws keys from keys.json. Aborting deployment.'.red);
-        return;
-    }
-
-    gulp.src(['./public/**', '!./public/**/*.{js,css,gz}'], { read: false })
-        .pipe(s3(aws, {
-            uploadPath: '/interactives/' + projectName + '/',
-            headers: {
-                'Cache-Control': 'max-age=300, no-transform, public'
-            }
-        }));
-    gulp.src('./public/**/*.{js,css,gz}', { read: false })
-        .pipe(s3(aws, {
-            uploadPath: '/interactives/' + projectName + '/',
-            headers: {
-                'Cache-Control': 'max-age=300, no-transform, public',
-                'Content-Encoding': 'gzip'
-            }
-        }));
-
-});
-```
 + ~~Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)~~
 + ~~Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)~~
 + ~~Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)~~
