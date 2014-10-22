@@ -5,9 +5,13 @@ A lightweight starting point to create interactive visualizations of data. Of al
 ## Use
 First `npm install`
 
-To run **/gulpfile.js**, from the root of the project use `npm start` or `gulp`
+To run **/gulpfile.js** for development, from the root of the project use `npm start` or `gulp`
 
-The files in **/html/** can contain mustache templates. The variables for those templates are defined in **options** var in the **/gulpfile.js** file.
+To deploy to S3 and gh-pages, run `gulp deploy`
+
+To deploy to gh-pages, run `gulp github`
+
+The files in **/mustache/** are mustache templates/partials. The variables for those templates are defined in **/options.json**
 
 ```
 var options = {
@@ -37,6 +41,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
 + Deploy /build/ to gh-pages with `gulp github`
++ Deploy /build/ to S3
 
 ## Gulp Packages
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
