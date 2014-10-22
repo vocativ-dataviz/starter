@@ -1,0 +1,18 @@
+{
+  "project": {
+    "org": "Vocativ",
+    "name": "Starter Project",
+    "slug": "dataviz-starter"
+  },
+  "website": {
+    "host": "localhost",
+    "port": 8888
+  },
+  "gaCode": "",
+  "aws": {
+    "key": "",
+    "secret": "",
+    "bucket": "interactives",
+    "path": "interactives"
+  }
+}

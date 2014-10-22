@@ -15,7 +15,12 @@ var options = {
     'host': 'localhost',
     'port': 8888,
     'projName': 'Project Name',
-    'gaCode': 'UA-XXXX-Y'
+    'gaCode': 'UA-XXXX-Y',
+    'aws': {
+        'key': process.env.AWS_KEY,
+        'secret': process.env.AWS_SECRET,
+        'bucket': 'interactives'
+    }
 }
 ```
 
@@ -28,7 +33,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + **/coffee/** is compiled into **/build/**
 + **/vendor/** is compiled into **/build/vendor.js**
 + Minifies CSS
-+ Uglifies JS (vendor and compiled Coffeescript)
++ Uglifies JS (vendor and compiled CoffeeScript)
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
 + Deploy /build/ to gh-pages with `gulp github`
@@ -37,7 +42,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
 
 ## Technologies / Libraries used
-+ [Coffeescript](http://coffeescript.org/)
++ [CoffeeScript](http://coffeescript.org/)
 + [Stylus](http://learnboost.github.io/stylus/)
 + [D3](http://d3js.org/)
 + [jQuery](http://jquery.com/)
@@ -45,64 +50,22 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + [Gulp](http://gulpjs.com/)
 + [Pym](http://blog.apps.npr.org/pym.js/)
 
-
 ## This template/starter needs to make sure the following is built-in
-+ Change the URL for each 'section/step' of the interactive so back button works
-+ Allow the user to link to and share specific sections/insights in the interactive
-+ ~~Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'~~
-+ ~~Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)~~
-+ ~~Include Vocativ house styles such as colors, buttons, and fonts~~
-+ ~~Pull in data from google sheets, if the reporter's data is there~~
-+ ~~Have PYM.js set up (and the structure required for that) so that the piece is easily embeddable in WordPress as a resizable iframe~~
+* [ ] Change the URL for each 'section/step' of the interactive so back button works
+* [ ] Allow the user to link to and share specific sections/insights in the interactive
+* [x] Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'
+* [x] Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)
+* [x] Include Vocativ house styles such as colors, buttons, and fonts
+* [x] Pull in data from google sheets, if the reporter's data is there
+* [x] Have Pym.js set up (and the structure required for that) so that the piece is easily embeddable in WordPress as a resizable iframe
 
 
 ## To-do
-+ Add [gulp-json-lint](https://www.npmjs.org/package/gulp-json-lint)
-+ Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
-+ Add [gulp-s3](https://www.npmjs.org/package/gulp-s3) and write similar deploy task to [Matt's script](https://github.com/Vocativ/wp-interactive/blob/master/selfies/gulpfile.js#L159)
-```
-gulp.task('deploy', ['gzip'], function() {
-
-
-    // gutil.log('Deploying to ' + stage);
-
-    var aws;
-    try {
-        aws = {
-              'key': process.env.AWS_KEY,
-              'secret': process.env.AWS_SECRET,
-              'bucket': 'interactives'
-        };
-
-        if(!aws.key || !aws.secret) {
-            new Error('Must have both AWS_KEY and AWS_SECRET env variables set');
-        }
-    } catch(err) {
-        gutil.log('Could not parse aws keys from keys.json. Aborting deployment.'.red);
-        return;
-    }
-
-    gulp.src(['./public/**', '!./public/**/*.{js,css,gz}'], { read: false })
-        .pipe(s3(aws, {
-            uploadPath: '/interactives/' + projectName + '/',
-            headers: {
-                'Cache-Control': 'max-age=300, no-transform, public'
-            }
-        }));
-    gulp.src('./public/**/*.{js,css,gz}', { read: false })
-        .pipe(s3(aws, {
-            uploadPath: '/interactives/' + projectName + '/',
-            headers: {
-                'Cache-Control': 'max-age=300, no-transform, public',
-                'Content-Encoding': 'gzip'
-            }
-        }));
-
-});
-```
-+ ~~Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)~~
-+ ~~Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)~~
-+ ~~Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)~~
+* [ ] Add [gulp-json-lint](https://www.npmjs.org/package/gulp-json-lint)
+* [ ] Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
+* [x] Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)
+* [x] Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)
+* [x] Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
 ```
 Interaction Events
 
