@@ -31,7 +31,7 @@ gulp.task('lint', function() {
         .pipe(coffeelint.reporter());
 });
 
-gulp.task('coffee', function() {
+gulp.task('coffee', ['lint'], function() {
     return gulp
         .src('./coffee/*.coffee')
         .pipe(coffee({bare: true}))
@@ -94,8 +94,8 @@ gulp.task('data', function() {
 gulp.task('watch', function() {
     gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
     gulp.watch('stylus/*.styl', ['stylus']);
-    gulp.watch('html/*', ['mustache']);
-    gulp.watch('vendor/*', ['vendor']);
+    gulp.watch('mustache/*', ['mustache']);
+    gulp.watch('javascript/*', ['js']);
 });
 
 gulp.task('webserver', function() {
@@ -110,7 +110,7 @@ gulp.task('webserver', function() {
         }));
 });
 
-gulp.task('build', ['lint', 'coffee', 'stylus', 'js', 'watch', 'mustache', 'data'], function() {
+gulp.task('build', ['coffee', 'stylus', 'js', 'mustache', 'data'], function() {
     return gulp;
 });
 
@@ -142,4 +142,4 @@ gulp.task('deploy', ['gzip'], function() {
         }));
 });
 
-gulp.task('default', ['deploy', 'webserver']);
+gulp.task('default', ['deploy', 'webserver', 'watch']);
