@@ -77,7 +77,7 @@ gulp.task('mustache', function() {
 
 gulp.task('js', function() {
     return gulp
-        .src('./lib/*.js')
+        .src('./javascript/*.js')
         .pipe(concat('lib.js'))
         .pipe(uglify())
         .pipe(filesize())
