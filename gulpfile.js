@@ -25,15 +25,15 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var webserver = require('gulp-webserver');
 var mincss = require('gulp-minify-css');
-var gutil = require('gulp-util');
+var util = require('gulp-util');
 var filesize = require('gulp-filesize');
 var mustache = require('gulp-mustache');
 var nib = require('nib');
 var github = require('gulp-gh-pages');
 var s3 = require('gulp-s3');
-var gutil = require('gulp-util');
 var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
+var htmlmin = require('gulp-htmlmin');
 
 // Lint CoffeeScript
 gulp.task('lint', function() {
@@ -66,13 +66,22 @@ gulp.task('stylus', function() {
         .pipe(gulp.dest('./build/'));
 });
 
-// Compile mustache to HTML
+// Compile Mustache to HTML
 gulp.task('mustache', function() {
     return gulp
         .src(['./html/header.html', './html/body.html', './html/footer.html'])
-        .pipe(concat('all.mustache'))
+        .pipe(concat('index.mustache'))
         .pipe(mustache(options))
         .pipe(concat('index.html'))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            collapseBooleanAttributes: true,
+            removeAttributeQuotes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            minifyJS: true,
+            minifyCSS: true
+        }))
         .pipe(gulp.dest('./build/'));
 });
 
@@ -122,6 +131,10 @@ gulp.task('webserver', function() {
         }));
 });
 
+gulp.task('build', ['lint', 'coffee', 'stylus', 'vendor', 'watch', 'mustache', 'data'], function() {
+    return gulp;
+});
+
 gulp.task('gzip', ['build'], function() {
     return gulp
         .src('build/**/*.{js,css}')
@@ -136,14 +149,14 @@ gulp.task('gzip', ['build'], function() {
 gulp.task('deploy', ['gzip'], function() {
     gulp.src(['./build/**', '!./build/**/*.{js,css,gz}'], {read: false})
         .pipe(s3(options.aws, {
-            uploadPath: '/interactives/' + projectName + '/',
+            uploadPath: '/interactives/' + options.projName + '/',
             headers: {
                 'Cache-Control': 'max-age=300, no-transform, public'
             }
         }));
     gulp.src('./build/**/*.{js,css,gz}', {read: false})
         .pipe(s3(options.aws, {
-            uploadPath: '/interactives/' + projectName + '/',
+            uploadPath: '/interactives/' + options.projName + '/',
             headers: {
                 'Cache-Control': 'max-age=300, no-transform, public',
                 'Content-Encoding': 'gzip'
@@ -152,4 +165,4 @@ gulp.task('deploy', ['gzip'], function() {
 });
 
 // Default Task
-gulp.task('default', ['lint', 'coffee', 'stylus', 'vendor', 'watch', 'mustache', 'data', 'deploy', 'webserver']);
+gulp.task('default', ['deploy', 'webserver']);

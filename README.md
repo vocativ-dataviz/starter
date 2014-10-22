@@ -50,23 +50,22 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + [Gulp](http://gulpjs.com/)
 + [Pym](http://blog.apps.npr.org/pym.js/)
 
-
 ## This template/starter needs to make sure the following is built-in
 * [ ] Change the URL for each 'section/step' of the interactive so back button works
 * [ ] Allow the user to link to and share specific sections/insights in the interactive
-* [x] ~~Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'~~
-* [x] ~~Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)~~
-* [x] ~~Include Vocativ house styles such as colors, buttons, and fonts~~
-* [x] ~~Pull in data from google sheets, if the reporter's data is there~~
-* [x] ~~Have PYM.js set up (and the structure required for that) so that the piece is easily embeddable in WordPress as a resizable iframe~~
+* [x] Report events to Google Analytics, including clicks on the page, as well as a 'completion' event to be fired when all sections are viewed, or interactive is otherwise 'completed'
+* [x] Have visualization respond to breakpoints (ie show less data on mobile, or use smaller padding/margin sizes)
+* [x] Include Vocativ house styles such as colors, buttons, and fonts
+* [x] Pull in data from google sheets, if the reporter's data is there
+* [x] Have Pym.js set up (and the structure required for that) so that the piece is easily embeddable in WordPress as a resizable iframe
 
 
 ## To-do
 * [ ] Add [gulp-json-lint](https://www.npmjs.org/package/gulp-json-lint)
 * [ ] Add [gulp-uncss](https://www.npmjs.org/package/gulp-uncss)
-* [x] ~~Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)~~
-* [x] ~~Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)~~
-* [x] ~~Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)~~
+* [x] Add Google [Analytics JS / tracking code](https://developers.google.com/analytics/devguides/collection/analyticsjs/)
+* [x] Add [gulp-gh-pages](https://github.com/rowoot/gulp-gh-pages)
+* [x] Add GA custom [interaction events](https://developers.google.com/analytics/devguides/collection/analyticsjs/events)
 ```
 Interaction Events
 
