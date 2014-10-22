@@ -110,7 +110,7 @@ gulp.task('webserver', function() {
         }));
 });
 
-gulp.task('build', ['coffee', 'stylus', 'js', 'mustache', 'data'], function() {
+gulp.task('default', ['coffee', 'stylus', 'js', 'mustache', 'data', 'webserver', 'watch'], function() {
     return gulp;
 });
 
@@ -142,4 +142,4 @@ gulp.task('deploy', ['gzip'], function() {
         }));
 });
 
-gulp.task('default', ['deploy', 'webserver', 'watch']);
+gulp.task('deploy', ['deploy']);
