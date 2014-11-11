@@ -20,6 +20,7 @@ var s3 = require('gulp-s3');
 var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
 var htmlmin = require('gulp-htmlmin');
+var watch = require('gulp-watch');
 
 // options
 var options = require('./options');
@@ -91,12 +92,33 @@ gulp.task('data', function() {
         .pipe(gulp.dest('./build/data/'));
 });
 
+/*
 gulp.task('watch', function() {
     gulp.watch('coffee/*.coffee', ['lint', 'coffee']);
     gulp.watch('stylus/*.styl', ['stylus']);
-    gulp.watch('mustache/*', ['mustache']);
+    gulp.watch(['mustache/*', 'mustache/partials/*'], ['mustache']);
     gulp.watch('javascript/*', ['js']);
 });
+*/
+
+gulp.task('watch', function(){
+    watch('coffee/*.coffee', function(files,cb){
+        gulp.start(['lint', 'coffee'], cb)
+    });
+
+    watch('stylus/*.styl', function(files,cb){
+        gulp.start('stylus', cb)
+    });
+
+    watch(['mustache/*', 'mustache/partials/*'], function(files,cb){
+        gulp.start('mustache', cb)
+    });
+
+    watch('javascript/*', function(files,cb){
+        gulp.start('js', cb)
+    });
+
+})
 
 gulp.task('webserver', function() {
     return gulp
