@@ -30,13 +30,13 @@ $(window).load ->
       data = jsondata
       vizData()
   }
-###
-
-$(window).load ->
-  vizData()
 
 $(window).resize ->
   console.log 'resizing, redrawing'
+  vizData()
+###
+
+$(window).load ->
   vizData()
 
 vizData = ->
