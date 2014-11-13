@@ -70,7 +70,7 @@ gulp.task "js", ->
   .pipe gulp.dest("./build/")
 
 gulp.task "data", ->
-  gulp.src("./data/*.csv", "./data/*.json")
+  gulp.src(["./data/*.csv", "./data/*.json"])
   .pipe filesize()
   .pipe gulp.dest("./build/data/")
 
@@ -93,7 +93,8 @@ gulp.task "watch", ->
 
 gulp.task 'git-reset', shell.task([
   'rm -rf .git',
-  'git init'
+  'git init',
+  'date > README.md'
 ])
 
 gulp.task "webserver", ->
