@@ -6,6 +6,7 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + Clone starter `git clone https://github.com/Vocativ/dataviz-starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
 + Install package.json `sudo npm install`
++ Make options.json based on **options.sample.json** `mv options.sample.json options.json`
 + Remove git history `gulp git-reset`
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
