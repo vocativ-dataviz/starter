@@ -4,15 +4,6 @@ vocCatScale = d3.scale.ordinal()
 
 data = null
 
-# Set up the pymChild, so that everytime the iframe is resized
-# the renderCallback function is called repeatedly
-# (so it needs to clear and re-render, not append)
-###
-pymChild = new pym.Child {
-  renderCallback: vizData
-}
-###
-
 # Load data from CSV
 ###
 d3.csv 'data/PunitivenessByState.abbr.csv', (csvdata) ->
@@ -36,47 +27,45 @@ $(window).resize ->
   vizData()
 ###
 
+$(window).click ->
+  # Example GA interaction event
+  #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
+
 $(window).load ->
+  pymChild = new pym.Child {
+    renderCallback: vizData
+    polling: 500
+  }
+
   vizData()
 
 vizData = ->
   parentEl = '#content'
   $parentEl = $(parentEl)
 
-  # This assumes there is a global 'data' var with our data
-  console.log 'Our data!', data
+  if data isnt undefined
+    console.log 'Our data!', data
 
   width = $parentEl.width() #500
   height = $parentEl.height() / 2 #500
 
   # Mobile / Desktop breakpoints
-  if width > 767
-    ###########
-    # Desktop #
-    ###########
-    console.log '==> Desktop'
+  if width > 649
+    console.log width, ' ==> Desktop'
     mobile = false
-
     margin =
       left: 16
       right: 16
       top: 16
       bottom: 16
   else
-    ###########
-    #  Mobile #
-    ###########
-    console.log '==> Mobile'
+    console.log width, '==> Mobile'
     mobile = true
-
     margin =
       left: 16
       right: 16
       top: 16
       bottom: 16
-
-  # Example GA interaction event
-  #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
 
   # Example GA completion event
   #ga 'Items', 'finished-interactive', 'INTERACTIVE--PROJECT--NAME', 1

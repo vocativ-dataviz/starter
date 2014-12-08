@@ -1,57 +1,49 @@
 "use strict"
 gulp = require("gulp")
-
-# plugins
-coffeelint    = require("gulp-coffeelint")
-stylus        = require("gulp-stylus")
-coffee        = require("gulp-coffee")
-concat        = require("gulp-concat")
-uglify        = require("gulp-uglify")
-rename        = require("gulp-rename")
-webserver     = require("gulp-webserver")
-mincss        = require("gulp-minify-css")
-util          = require("gulp-util")
-filesize      = require("gulp-filesize")
-mustache      = require("gulp-mustache-plus")
-nib           = require("nib")
-github        = require("gulp-gh-pages")
-s3            = require("gulp-s3")
-gulpif        = require("gulp-if")
-gzip          = require("gulp-gzip")
-htmlmin       = require("gulp-htmlmin")
-watch         = require("gulp-watch")
-shell         = require("gulp-shell")
+plugins = require("gulp-load-plugins")({
+  rename: {
+    'gulp-minify-css': 'mincss'
+    'gulp-mustache-plus': 'mustache'
+  }
+})
+nib = require("nib")
+watch = plugins.watch
 
 # options
 options = require("./options")
+options.prefixUrl = 'http://'+options.website.host
+if options.website.port isnt ''
+  options.prefixUrl += ':'+options.website.port
 
 # tasks
 gulp.task "lint", ->
   gulp.src("./coffee/*.coffee")
-  .pipe coffeelint()
-  .pipe coffeelint.reporter()
+  .pipe plugins.coffeelint()
+  .pipe plugins.coffeelint.reporter()
 
 gulp.task "coffee", ["lint"], ->
   gulp.src("./coffee/*.coffee")
-  .pipe coffee(bare: true)
-  .pipe uglify()
-  .pipe filesize()
+  .pipe plugins.coffee(bare: true)
+  .pipe plugins.uglify()
+  .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
 gulp.task "stylus", ->
   gulp.src("./stylus/style.styl")
-  .pipe stylus(use: [nib()])
-  .pipe mincss(keepBreaks: true)
-  .pipe filesize()
+  .pipe plugins.stylus(use: [nib()])
+  .pipe plugins.mincss(keepBreaks: true)
+  .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
 gulp.task "mustache", ->
-  gulp.src(["./mustache/*.mustache"]).pipe(mustache(options, {},
+  gulp.src(["./mustache/*.mustache"])
+  .pipe(plugins.mustache(options, {},
     header: "./mustache/partials/header.mustache"
     body: "./mustache/partials/body.mustache"
     footer: "./mustache/partials/footer.mustache"
-  ))
-  .pipe(rename(extname: ".html")).pipe(htmlmin(
+  ))  
+  .pipe(plugins.rename(extname: ".html"))
+  .pipe(plugins.htmlmin(
     collapseWhitespace: true
     collapseBooleanAttributes: true
     removeAttributeQuotes: true
@@ -64,15 +56,25 @@ gulp.task "mustache", ->
 
 gulp.task "js", ->
   gulp.src("./javascript/*.js")
-  .pipe concat("lib.js")
-  .pipe uglify()
-  .pipe filesize()
+  .pipe plugins.concat("lib.js")
+  .pipe plugins.uglify()
+  .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
+
+gulp.task "prefix", ->
+  gulp.src("./build/*.html")
+  .pipe plugins.prefix(options.prefixUrl, null, true)
+  .pipe gulp.dest('./build/')
 
 gulp.task "data", ->
   gulp.src(["./data/*.csv", "./data/*.json"])
-  .pipe filesize()
+  .pipe plugins.filesize()
   .pipe gulp.dest("./build/data/")
+
+gulp.task "img", ->
+  gulp.src(["./img/*.svg", "./img/*.png"])
+  .pipe plugins.filesize()
+  .pipe gulp.dest("./build/img/")
 
 gulp.task "watch", ->
   watch "coffee/*.coffee", {name: 'Coffee'}, (events, done) ->
@@ -91,14 +93,27 @@ gulp.task "watch", ->
     gulp.start "js"
     done()
 
-gulp.task 'git-reset', shell.task([
+  watch "data/*", {name: 'Vendor JS'}, (events, done) ->
+    gulp.start "data"
+    done()
+
+  watch "img/*", {name: 'Vendor JS'}, (events, done) ->
+    gulp.start "img"
+    done()
+
+gulp.task 'git-reset', plugins.shell.task([
   'rm -rf .git',
   'git init',
   'date > README.md'
 ])
 
+gulp.task 'github', ->
+  gulp.src('./build/**/*')
+    .pipe plugins.github()
+
 gulp.task "webserver", ->
-  gulp.src("./build/").pipe webserver(
+  gulp.src("./build/")
+  .pipe plugins.webserver(
     host: options.website.host
     port: options.website.port
     fallback: "build/index.html"
@@ -112,8 +127,9 @@ gulp.task "default", [
   "js"
   "mustache"
   "data"
+  "img"
   "webserver"
   "watch"
 ], -> gulp
 
-gulp.task "deploy", ["deploy"]
+gulp.task "deploy", ["github"]

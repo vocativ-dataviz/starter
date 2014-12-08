@@ -1,10 +1,11 @@
+@import 'nib'
 @import "reset.styl"
 
 /*  Color variables
   ------------------  */
 
 $fontcolor = #333333
-$bgcolor = #e6e6e6
+$bgcolor = white
 
 /* Highlight color, when user selects text */
 $highlight = #FFF9A2
@@ -24,16 +25,23 @@ em { background: rgba($highlight, 0.5) }
 @import "typography.styl"
 
 body
+  background $bgcolor
+  color $fontcolor
+  -webkit-text-size-adjust 100% /* Stops Mobile Safari from auto-adjusting font-sizes */
+
+#container
+  background $bgcolor
+  color $fontcolor
   line-height 1.45em
   font-size 1.2em
   //max-width 960px
   max-width 650px
   padding 32px 48px 84px
-  background $bgcolor
-  color $fontcolor
-  -webkit-text-size-adjust 100% /* Stops Mobile Safari from auto-adjusting font-sizes */
   margin-left auto
   margin-right auto
+
+#content
+  min-height 600px
 
 p
   margin 0.6em 0
@@ -54,34 +62,52 @@ section
   &:last-child
     margin-bottom 0
 
+#topbar
+  $buttonSize = 32px
 
+  height $buttonSize
+  background-color #404040
+  color white
+  width 100%
+  padding 0.25em  
 
+  ul
+    position absolute
+    right 0
+    top 0
 
+    li
+      opacity 0.9
+      background-color #6c6c6c
+      cursor pointer
+      display inline-block
+      width $buttonSize
+      height $buttonSize
+      padding 4px
+      margin-left 1px
 
+      transition 0.1s all ease-in-out
 
+      &:hover
+        background-color #222222
+        opacity 1
 
-
-// Tablet Layout
-@media only screen and (min-width: 768px) and (max-width: 991px)
-  body
-    max-width 712px
-    width 80%
-    font-size 1.1em
-
-
-
-
-
-
+  h2
+    font-size 1.2em
+    display inline-block
+    margin-left 0.25em
 
 
 
 // Mobile Layout
-@media only screen and (max-width: 767px)
-  body
+@media only screen and (max-width: 649px)
+  #container
     padding 8px
     margin 0
     max-width 100%
     width 100%
     font-size 0.9em
     line-height 1.5em
+
+  #content
+    min-height 300px
