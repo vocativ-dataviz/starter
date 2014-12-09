@@ -1,14 +1,20 @@
 <nav id="topbar">
   <h2 id="vocativ-logo">Vocativ</h2>
   <ul>
-    <li id="data-button" class="topbar-button">    
+    <li id="data-button" class="topbar-button">
       <a href="#"><img src="img/data-icon.svg" /></a>
     </li>
-    <li id="twitter-button" class="topbar-button" >    
-      <a href="#" ><img src="img/twitter-icon.svg" /></a>
+    <li id="twitter-button" class="topbar-button" >
+      <a href="https://twitter.com/share?url={{ website.host }}/{{ website.slug }}&text={{ project.sharetext }}&via=vocativ"
+      target="_blank">
+        <img src="img/twitter-icon.svg" />
+      </a>
     </li>
-    <li id="facebook-button" class="topbar-button">    
-      <a href="#" ><img src="img/facebook-icon.svg" /></a>
+    <li id="facebook-button" class="topbar-button">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ website.host }}/{{ website.slug }}"
+      target="_blank">
+        <img src="img/facebook-icon.svg" />
+      </a>
     </li>
   </ul>
 </nav>

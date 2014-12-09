@@ -62,6 +62,8 @@ section
   &:last-child
     margin-bottom 0
 
+$buttonSize = 48px
+
 #data-sources
   margin 0
   background-color #e0e0e0
@@ -78,24 +80,25 @@ section
   background-size contain
   background-repeat no-repeat
 
+  a:link,a:hover,a:visited
+    color #222222
+
   p
     max-width 82%
     margin-left auto
     margin-right auto
 
 .data-active
-  top 32px !important
+  top $buttonSize !important
 
 
 nav#topbar
-  $buttonSize = 32px
-
   z-index 100 !important
   height $buttonSize
   background-color #404040
   color white
   width 100%
-  padding 0.25em  
+  padding 0.25em
 
   ul
     position absolute
@@ -112,18 +115,21 @@ nav#topbar
       width $buttonSize
       height $buttonSize
       padding 4px
-      margin-left 1px
+      padding-left 5px
+      border-left 1px solid white
 
-      transition 0.1s all ease-in-out
+
+      transition 0.07s all ease-in-out
 
       &:hover
         background-color #222222
         opacity 1
 
   h2
-    font-size 1.2em
+    font-size 1.4em
     display inline-block
     margin-left 0.25em
+    margin-top 0.12em
 
 
 
