@@ -27,6 +27,8 @@ $(window).resize ->
   vizData()
 ###
 
+
+
 $(window).click ->
   # Example GA interaction event
   #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
@@ -36,6 +38,9 @@ $(window).load ->
     renderCallback: vizData
     polling: 500
   }
+
+  $('#data-button').click ->
+    $('#data-sources').toggleClass('data-active')
 
   vizData()
 
