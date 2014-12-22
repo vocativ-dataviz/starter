@@ -4,6 +4,7 @@ plugins = require("gulp-load-plugins")({
   rename: {
     'gulp-minify-css': 'mincss'
     'gulp-mustache-plus': 'mustache'
+    'gulp-gh-pages': 'github'
   }
 })
 nib = require("nib")
@@ -41,7 +42,7 @@ gulp.task "mustache", ->
     header: "./mustache/partials/header.mustache"
     body: "./mustache/partials/body.mustache"
     footer: "./mustache/partials/footer.mustache"
-  ))  
+  ))
   .pipe(plugins.rename(extname: ".html"))
   .pipe(plugins.htmlmin(
     collapseWhitespace: true
