@@ -72,7 +72,7 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
 + Deploy /build/ to gh-pages with `gulp github`
-+ --Deploy /build/ to S3-- 
++ --Deploy /build/ to S3--
 
 ## Gulp Packages
 [Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
@@ -85,7 +85,6 @@ The master style / CSS file is **/stylus/style.styl**, all other .styl files nee
 + [Underscore](http://underscorejs.org/)
 + [Gulp](http://gulpjs.com/)
 + [Pym](http://blog.apps.npr.org/pym.js/)
-
 
 ### GA Interaction Events
 ```
@@ -108,3 +107,9 @@ opt_noninteraction: false
 
 where DESCRIPTIVE-OF-INTERACTIVE = Transgender-Rights-Map, etc - should be text the uniquely describes the interactive element that user finished the interaction with
 ```
+
+# To-Do
+Additions/changes to be made on this boilerplate/starter.
+- [ ] Add [gulp-imagemin](https://github.com/sindresorhus/gulp-imagemin) to compress images and SVG
+- [ ] Add [gulp-notify](https://github.com/mikaelbr/gulp-notify)
+- [ ] Add [gulp-uncss](https://www.npmjs.com/package/gulp-uncss)
