@@ -23,7 +23,8 @@ if options.website.port isnt ''
 gulp.task 'git-reset', plugins.shell.task([
   'rm -rf .git',
   'git init',
-  'date > README.md'
+  'rm README.md',
+  'mv PROJECT_README.md README.md'
 ])
 
 # Lint coffeescript for errors
