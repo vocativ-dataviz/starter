@@ -12,8 +12,8 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + Add repo in GitHub desktop app, add GitHub URL as remote
 + `gulp`
 + Develop
-+ Want to show internally? `gulp github` and see it at http://vocativ-dataviz.github.io/NEW-PROJECT/
-+ Ready to deploy? `gulp deploy`
++ Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
++ Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT>
 
 ## So you wanna deploy an interactive?
 Follow this basic checklist!
