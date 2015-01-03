@@ -13,6 +13,7 @@ parentEl = '#viz-content'
 ###
 d3.csv 'data/PunitivenessByState.abbr.csv', (csvdata) ->
   data = csvdata
+  vizData()
 ###
 
 # Load data from google sheets
@@ -38,7 +39,7 @@ $(window).load ->
     polling: 500
   }
 
-  $('#data-button').click -> $('#data-sources').toggleClass('data-active')
+  #$('#data-button').click -> $('#data-sources').toggleClass('data-active')
 
   vizData()
 
@@ -51,7 +52,7 @@ vizData = ->
     console.log 'Our data!', data
 
   width = $parentEl.width() #500
-  height = 250
+  height = width
 
   # Mobile / Desktop breakpoints
   if width > 649
