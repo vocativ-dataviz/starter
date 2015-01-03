@@ -22,7 +22,7 @@ This starter is a jumping-off-point for all sorts of different interactive datav
 This is the main file for the app, where initial variables are defined, data is loaded, and the proper function to visualize the data is called. 
 
 #### map.coffee
-If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable
+If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable. You will need to modify the code to properly accept whatever shape your data is in. 
 
 ## So you wanna deploy an interactive?
 Follow this basic checklist!

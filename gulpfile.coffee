@@ -18,7 +18,6 @@ if options.website.port isnt ''
   options.prefixUrl += ':'+options.website.port
 
 # --- Tasks --- #
-
 gulp.task "default", [
   "watch"
   "coffee"
@@ -28,6 +27,11 @@ gulp.task "default", [
   "data"
   "img"
   "webserver"  
+], -> gulp
+
+gulp.task "mirror", [
+  "github"
+  "publish"
 ], -> gulp
 
 # Remove previous git data and init fresh
