@@ -15,6 +15,15 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
 + Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT>
 
+## Application structure
+This starter is a jumping-off-point for all sorts of different interactive dataviz. It tries to take care of all the things you don't want to think of so you can move quickly, but leaving enough room for anything to be possible. 
+
+#### app.coffee
+This is the main file for the app, where initial variables are defined, data is loaded, and the proper function to visualize the data is called. 
+
+#### map.coffee
+If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable
+
 ## So you wanna deploy an interactive?
 Follow this basic checklist!
 

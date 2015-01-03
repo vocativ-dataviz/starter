@@ -19,6 +19,17 @@ if options.website.port isnt ''
 
 # --- Tasks --- #
 
+gulp.task "default", [
+  "watch"
+  "coffee"
+  "stylus"
+  "js"
+  "mustache"
+  "data"
+  "img"
+  "webserver"  
+], -> gulp
+
 # Remove previous git data and init fresh
 gulp.task 'git-reset', plugins.shell.task([
   'rm -rf .git',
@@ -36,8 +47,11 @@ gulp.task "lint", ->
 # Compile coffeescript
 gulp.task "coffee", ["lint"], ->
   gulp.src("./coffee/*.coffee")
-  .pipe plugins.coffee(bare: true)
+  .pipe plugins.sourcemaps.init()
+  .pipe plugins.coffee(bare: true).on('error', plugins.util.log)  
+  .pipe plugins.sourcemaps.write()
   .pipe plugins.uglify()
+  .pipe plugins.concat("app.js")  
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
@@ -72,8 +86,8 @@ gulp.task "mustache", ->
 # Concat and uglify vendor JS files
 gulp.task "js", ->
   gulp.src("./javascript/*.js")
-  .pipe plugins.concat("lib.js")
   .pipe plugins.uglify()
+  .pipe plugins.concat("lib.js")
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
@@ -135,18 +149,8 @@ gulp.task "webserver", ->
     fallback: "build/index.html"
     livereload: true
     directoryListing: false
+    open: true
   )
-
-gulp.task "default", [
-  "coffee"
-  "stylus"
-  "js"
-  "mustache"
-  "data"
-  "img"
-  "webserver"
-  "watch"
-], -> gulp
 
 # Watch files for changes and livereload when detected
 gulp.task "watch", ->

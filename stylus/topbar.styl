@@ -1,0 +1,68 @@
+$buttonSize = 48px
+
+#data-sources
+  margin 0
+  background-color #e0e0e0
+  padding 0.8em
+  text-align right
+  transition all 0.3s ease-in-out
+  position absolute
+  z-index 1 !important
+  width 100%
+  top -500px
+  left 0
+  background-image url(img/data-icon.svg)
+  background-position 98% center
+  background-size contain
+  background-repeat no-repeat
+
+  a:link,a:hover,a:visited
+    color #222222
+
+  p
+    max-width 82%
+    margin-left auto
+    margin-right auto
+
+.data-active
+  top $buttonSize !important
+
+
+nav#topbar
+  z-index 100 !important
+  height $buttonSize
+  background-color #404040
+  color white
+  width 100%
+  padding 0.25em
+
+  ul
+    position absolute
+    right 0
+    top 0
+    z-index 10
+
+    li
+      z-index 10
+      opacity 0.9
+      background-color #6c6c6c
+      cursor pointer
+      display inline-block
+      width $buttonSize
+      height $buttonSize
+      padding 4px
+      padding-left 5px
+      border-left 1px solid white
+
+
+      transition 0.07s all ease-in-out
+
+      &:hover
+        background-color #222222
+        opacity 1
+
+  h2
+    font-size 1.4em
+    display inline-block
+    margin-left 0.25em
+    margin-top 0.12em

@@ -1,135 +1,22 @@
-# Example GA interaction event
-#ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
-
-# Example GA completion event
-#ga 'Items', 'finished-interactive', 'INTERACTIVE--PROJECT--NAME', 1
-
-
-$(document).click ->
-  ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
-
-
-
-# Create a categorical scale with Vocativ's dataviz colors
-vocCatScale = d3.scale.ordinal()
-  .range(['#FB514E', '#2d82ca', '#49af37', '#9065c8'])
-
-colorScaleColors = ['#e6e6e6','#FF0000']
-
-data = null
-vizScale = null
-developmentMode = null
-#numberFormat = d3.format('.3s') # Turns 24000 into '24.0k'
-numberFormat = d3.format('s') # For no decimals
-
-uri = new URI(window.location)
-urlQuery = uri.search true # Returns key-value pairs for URL queries
-
-if urlQuery.development is 'true'
-  developmentMode = true
-else
-  developmentMode = false
-
-# Load data from CSV
-###
-d3.csv 'data/PunitivenessByState.abbr.csv', (csvdata) ->
-  data = csvdata
-  vizData()
-###
-
-$(window).load ->
-  # Set up the pymChild, so that everytime the iframe is resized
-  # the renderCallback function is called repeatedly
-  # (so it needs to clear and re-render, not append)
-
-  pymChild = new pym.Child {
-    polling: 500
-  }
-
-  if urlQuery.key isnt undefined
-    sheetKey = urlQuery.key
-  else
-    sheetKey = '1EpP7dXXGWKEb91uumBDgKBr5jHY0O4U6S4T37L88ua4'
-
-  simpleSheetVal = null
-
-  if urlQuery.sheet is undefined
-    simpleSheetVal = true
-  else
-    simpleSheetVal = false
-
-  Tabletop.init {
-    key: sheetKey
-    simpleSheet: simpleSheetVal
-    callback: (jsondata, tabletop) ->
-      console.log 'rawsheetdata', jsondata
-      #data = jsondata#.Data.elements
-      if urlQuery.sheet isnt undefined
-        sheetName = decodeURI(urlQuery.sheet)
-        data = jsondata[sheetName].elements
-      else
-        data = jsondata
-
-      vizData()
-  }
-
-###
-$(window).resize ->
-  console.log 'resizing, redrawing'
-  vizData()
-###
-
-vizData = ->
-  parentEl = '#content'
-  $parentEl = $(parentEl)
-
-  # This assumes there is a global 'data' var with our data
-  console.log 'Our data!', data, data[data.length-1]
-
-  width = $parentEl.width()
-  height = $parentEl.height()
-
-  vizScaleOrig = 900
-
-  # Mobile / Desktop breakpoints
-  if width > 649
-    ###########
-    # Desktop #
-    ###########
-    console.log width, ' ==> Desktop'
-    mobile = false
-    vizScale = vizScaleOrig
-
-    margin =
-      left: 16
-      right: 16
-      top: 16
-      bottom: 16
-  else
-    ###########
-    #  Mobile #
-    ###########
-    console.log width, ' ==> Mobile'
-    mobile = true
-    vizScale = ( vizScaleOrig * 0.4 )
-
-    margin =
-      left: 2
-      right: 2
-      top: 8
-      bottom: 8
-
+mapData = ->
   # Rewrite height/width with margins for visualization
-  height = height - margin.top - margin.bottom
-  width = width - margin.left - margin.right
+  #height = height - margin.top - margin.bottom
+  #width = width - margin.left - margin.right
 
   stateData = {}
 
+  colorScaleColors = ['#CCC', vocCatScale(1)]
 
+  numberFormat = d3.format(",d")
+
+  ###
   if urlQuery.metric is undefined
     vizMetric = 'atorbelowminimumwagepercapita'
   else
     vizMetric = urlQuery.metric
+  ###
+
+  vizMetric = 'bullying'
 
   data.forEach (d) ->
     #console.log 'foreach d', d, d[vizMetric]
@@ -147,54 +34,16 @@ vizData = ->
     .domain metricExtent
     .range colorScaleColors
 
-
-  # Make option selector for metrics
-  if developmentMode is true
-    dataKeys = _.keys(data[0])
-    #console.log 'dataKeys', dataKeys
-
-    keySelector = d3.select(parentEl)
-      .append('select')
-      .attr('id', 'key-selector')
-
-    keySelector.selectAll('option')
-      .data dataKeys
-      .enter().append('option')
-      .attr 'value', (d,i) -> d
-      .text (d,i) -> d
-      .attr 'selected', (d,i) ->
-        if vizMetric isnt undefined
-          if d is vizMetric
-            return 'selected'
-
-    keySelector.on 'change', ->
-      vizMetric = $(this).val()
-      console.log 'changed to ', vizMetric
-      window.location.href = uri.setSearch('metric', vizMetric).toString()
-
   # Basic D3 visualization skeleton
-  svg = d3.select('#viz-svg').append('svg')
+  svg = d3.select(parentEl).append('svg')
     .attr
       width: width + margin.left + margin.right
       height: height + margin.top + margin.bottom
       preserveAspectRatio: 'xMidYMid'
       viewBox: '0 0 '+width+' '+height
 
-
-  if developmentMode is true
-    $('#viz-metric').text vizMetric
-    svg.append('text').text vizMetric
-      .attr
-        'font-size': 9
-        'fill': '#CCC'
-        'x': 2
-
-    svg.style 'border', '1px solid #999'
-
-
-  svg = svg.append('g').attr('transform', 'translate(10,10)')
+  svg = svg.append('g')
     .attr 'transform', 'translate('+margin.left + ',' + margin.top + ')'
-
 
   legend = svg.append('g').attr('class', 'viz-legend')
 
@@ -305,7 +154,7 @@ vizData = ->
     subunits = topojson.feature(us, us.objects.usStates)
 
     projection = d3.geo.albersUsa()
-      .scale vizScale
+      .scale mapZoom
       .translate [width/2, height/2]
 
     path = d3.geo.path()
