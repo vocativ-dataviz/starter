@@ -29,7 +29,7 @@ callback: (jsondata, tabletop) ->
 # Example GA completion event
 #ga 'Items', 'finished-interactive', 'INTERACTIVE--PROJECT--NAME', 1
 
-$(window).click ->
+#$(window).click ->
   # Example GA interaction event
   #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
 
@@ -40,9 +40,7 @@ $(window).load ->
 
   $('#data-button').click -> $('#data-sources').toggleClass('data-active')
 
-}
-
-  #vizData()
+  vizData()
 
 vizData = ->
   $parentEl = $(parentEl)
@@ -83,8 +81,8 @@ vizData = ->
     .append('svg')
       .attr('id', 'viz-svg')
       .attr
-          width: width
-          height: height
+        width: width
+        height: height
     .append('g')
       .attr('transform', 'translate('+margin.left+','+margin.top+')')
 

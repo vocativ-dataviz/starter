@@ -7,7 +7,7 @@ mapData = ->
 
   colorScaleColors = ['#CCC', vocCatScale(1)]
 
-  numberFormat = d3.format(",d")
+  numberFormat = d3.format(',d')
 
   ###
   if urlQuery.metric is undefined
@@ -129,9 +129,11 @@ mapData = ->
 
       if tipData isnt undefined
         if tipNumberFormat(tipData) isnt ''
-          tooltipText = '<h4>'+stateAbbr + '</h4> <p><strong>' + tipNumberFormat(tipData) + '</strong>'
+          tooltipText = '<h4>'+stateAbbr + '</h4> <p><strong>'
+          tooltipText += tipNumberFormat(tipData) + '</strong>'
         else
-          tooltipText = '<h4>'+stateAbbr + '</h4> <p><strong>' + tipData + '</strong>'
+          tooltipText = '<h4>'+stateAbbr + '</h4> <p><strong>'
+          tooltipText += tipData + '</strong>'
 
         tooltipText += '<br><small>'
 
