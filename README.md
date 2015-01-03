@@ -7,6 +7,7 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + Go to it `cd NEW-PROJECT`
 + Install package.json `sudo npm install`
 + Make options.json based on **options.sample.json** `mv options.sample.json options.json`
++ `subl options.json` and edit the project name and slug for your project
 + Remove git history `gulp git-reset`
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
@@ -14,6 +15,7 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + Develop
 + Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
 + Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT>
++ Want to run gulp and upload to GitHub whenever you quit? `npm work`
 
 ## Application structure
 This starter is a jumping-off-point for all sorts of different interactive dataviz. It tries to take care of all the things you don't want to think of so you can move quickly, but leaving enough room for anything to be possible. 
