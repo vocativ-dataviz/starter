@@ -14,17 +14,23 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + `gulp`
 + Develop
 + Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
-+ Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT>
++ Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT/>
 + Want to run gulp and upload to GitHub whenever you quit? `npm work`
 
 ## Application structure
 This starter is a jumping-off-point for all sorts of different interactive dataviz. It tries to take care of all the things you don't want to think of so you can move quickly, but leaving enough room for anything to be possible. 
 
-#### app.coffee
+#### /coffee/app.coffee
 This is the main file for the app, where initial variables are defined, data is loaded, and the proper function to visualize the data is called. 
 
-#### map.coffee
-If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable. You will need to modify the code to properly accept whatever shape your data is in. 
+#### /coffee/map.coffee
+If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable. You will need to modify the code to properly accept whatever shape your data is in.
+
+#### /stylus/style.styl
+The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file.
+
+#### /mustache/partials/body.mustache
+This is the only HTML file you need to be modifying, in most cases.
 
 ## So you wanna deploy an interactive?
 Follow this basic checklist!
@@ -52,8 +58,9 @@ Follow this basic checklist!
     - [ ] If reporter-driven, have they given final approval?
     - [ ] If running off Google sheets, has it been converted to local JSON/CSV?
 - [ ] Is everybody who worked on it credited in some way?
-- [ ] Does it work and look right at all screen sizes in the CMS?
-    - [ ] Check at 650px (size of CMS desktop column)
+- [ ] Test it embedded inside the CMS, does everything work as expected?
+- [ ] Does it work and look right at all screen sizes **in the CMS?**
+    - [ ] Check at 640px (size of CMS desktop column)
     - [ ] Check at 320px (iPhone 3 portrait width)
     - [ ] Check at 1024px (basic desktop size)
     - [ ] What happens when you resize the window between 320 and 1024px?
@@ -66,27 +73,29 @@ To run **/gulpfile.coffee** for development, from the root of the project use `n
 
 To deploy to gh-pages, run `gulp github`
 
-To deploy to S3, run `gulp deploy`
+To deploy to S3, run `gulp publish`
 
 The files in **/mustache/** are mustache templates/partials. The variables for those templates are defined in **/options.json**
 
-The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file.
-
 
 ## What gulpfile.coffee does
++ Removes **.git** and moves **PROJECT_README.md** to **README.md** to initialize a new project with `gulp git-reset`
 + **/mustache/** is compiled into **/build/index.html**
 + **/stylus/style.styl** is compiled into **build/style.css**
 + **/coffee/** is compiled into **/build/app.js**
 + **/javascript/** is compiled into **/build/lib.js**
++ .png and .svg in **/img/** is optimized and moved to **/build/img/**
++ .json and .csv in **/data/** is moved to **/build/data/**
 + Minifies CSS
 + Uglifies JS (vendor and compiled CoffeeScript)
 + Watches all files and compiles them on change
 + Starts a local webserver at ___localhost:8888___
 + Deploy /build/ to gh-pages with `gulp github`
-+ --Deploy /build/ to S3--
++ Deploy /build/ to S3 with `gulp publish`
++ Mirror /build/ on S3 and gh-pages with `gulp mirror`
 
 ## Gulp Packages
-[Found in Package.json](https://github.com/Vocativ/dataviz-starter/blob/master/package.json)
+[Found in Package.json](https://github.com/vocativ-dataviz/starter/blob/master/package.json)
 
 ## Technologies / Libraries used
 + [CoffeeScript](http://coffeescript.org/)
