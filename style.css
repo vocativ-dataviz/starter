@@ -1,0 +1,36 @@
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased}
+canvas,iframe,img,svg,video{max-width:100%}
+pre{white-space:pre;word-wrap:break-word}
+button,input[type=button],input[type=submit],label{cursor:pointer}
+a,abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{margin:0;padding:0;border:0}
+a img{border:0}
+button{position:relative;font-family:Helvetica;font-size:14px;font-weight:700;background-color:#dedede;color:#262e31;border:none;outline:0;width:auto;height:34px;padding:0 15px;line-height:30px;cursor:pointer;-webkit-box-shadow:inset rgba(0,0,0,.2) 0 -2px 0;box-shadow:inset rgba(0,0,0,.2) 0 -2px 0;-webkit-border-radius:2px;border-radius:2px;margin:2px}
+button:hover{border:none;outline:0;background:#e6e6e6}
+button.selected,button:active{color:#0072bc;background-color:#d6d6d6;top:1px;-webkit-box-shadow:inset rgba(0,0,0,.2) 0 2px 0;box-shadow:inset rgba(0,0,0,.2) 0 2px 0}
+h1,h2,h3,h4,h5{font-family:'Forza A','Forza B','Helvetica Neue',Arial,sans-serif}
+body{font-family:'Whitney SSm A','Whitney SSm B','Helvetica Neue',Helvetica,Arial,sans-serif}
+.huge,h1{font-size:3em;line-height:1.1em}
+.large,h2{font-size:2.75em;line-height:1.5em}
+.bigger,h3{font-size:2em;line-height:1.5em;margin:.1em 0}
+.big,h4{font-size:1.5em;line-height:1.5em;margin:.1em 0}
+.small,small{opacity:.8;-ms-filter:"alpha(Opacity=80)";filter:alpha(opacity=80);font-size:.7em;line-height:1.2em}
+@media only screen and (max-width:767px){.huge,h1{font-size:2.5em;line-height:1.1em;margin-bottom:12px}
+.large,h2{font-size:2em;font-weight:800;line-height:1.4em;margin-bottom:6px}
+.bigger,h3{font-size:1.75em;line-height:1.2em;font-weight:800;margin:6px 0}
+.big,h4{font-size:1.4em;line-height:1.5em;font-weight:700;margin:8px 0}}
+::selection{background:#fff9a2}
+::-moz-selection{background:#fff9a2}
+img::selection{background:0 0}
+img::-moz-selection{background:0 0}
+body{-webkit-tap-highlight-color:#fff9a2}
+em{background:rgba(255,249,162,.5)}
+body{background:#fff;color:#333;-webkit-text-size-adjust:100%}
+#title{display:none}
+#container{background:#fff;color:#333;line-height:1.4em;font-size:1.2em;max-width:630px;padding:8px 8px 12px;margin-left:auto;margin-right:auto}
+p{margin:.6em 0}
+a:hover,a:link,a:visited{color:#112582}
+section{margin:12px 0}
+section:last-child{margin-bottom:0}
+@media only screen and (max-width:649px){#container{padding:8px;margin:0;max-width:100%;width:100%;font-size:.9em;line-height:1.5em}
+#content{min-height:300px}}
