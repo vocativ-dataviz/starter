@@ -155,8 +155,10 @@ mapData = ->
         (either a state has a property or it doesn't)
 
         thisStateData = stateData[d.properties['STATE_ABBR']]
+        console.log 'thisStateData', thisStateData
+
         if thisStateData isnt undefined
-          if thisStateData is 'x'
+          if thisStateData is 'x' or thisStateData is 'Y'
             vocCatScale[0]
           else
             '#CCC'
