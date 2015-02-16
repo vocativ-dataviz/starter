@@ -39,10 +39,24 @@ mapData = ->
 
   #console.log 'metricExtent', metricExtent
 
+  ###
   metricColorScale = d3.scale.linear()
     #.interpolate d3.interpolateLab
     .domain metricExtent
     .range colorScaleColors
+  ###
+
+  quantDomain = [
+    d3.quantile(metricExtent, 0)
+    d3.quantile(metricExtent, 0.25)
+    d3.quantile(metricExtent, 0.5)
+    d3.quantile(metricExtent, 0.75)
+    d3.quantile(metricExtent, 1)
+  ]
+
+  metricColorScale = d3.scale.threshold()
+    .domain quantDomain
+    .range ["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]
 
   # Basic D3 map skeleton
   # Using preserveAspectRatio and viewBox to make the map responsive
@@ -59,7 +73,8 @@ mapData = ->
   # Make a legend if we need it
   makeLegend = ->
     legend = svg.append('g').attr('class', 'viz-legend')
-    
+
+    ###
     gradientId = 'legend-gradient'
 
     defs = legend.append('defs').append('linearGradient')
@@ -89,7 +104,21 @@ mapData = ->
         y: -2
         width: ( width * 0.69 )
         height: 20
-    
+    ###
+
+    legend.selectAll('rect')
+      .data metricColorScale.range()
+      .enter().append('rect')
+      .attr
+        width: 50
+        height: 50
+        x: (d,i) ->
+          i * 75
+        y: (d,i) ->
+          2
+        fill: (d,i) ->
+          d
+
 
     legend.append('text')
       .text(numberFormat(metricExtent[1]))
@@ -151,15 +180,10 @@ mapData = ->
         metricColorScale +stateData[d.properties['STATE_ABBR']]
                 
         ###
-        Use this for binary data 
-        (either a state has a property or it doesn't)
-
         thisStateData = stateData[d.properties['STATE_ABBR']]
-        console.log 'thisStateData', thisStateData
-
         if thisStateData isnt undefined
-          if thisStateData is 'x' or thisStateData is 'Y'
-            vocCatScale[0]
+          if thisStateData is 'x'
+            'red'
           else
             '#CCC'
         ####
