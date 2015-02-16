@@ -17,15 +17,16 @@ d3.csv 'data/PunitivenessByState.abbr.csv', (csvdata) ->
 ###
 
 # Load data from google sheets
-###
 Tabletop.init {
-key: '16p8arXc4-Ynjl5tPJpiyqZTH_54rTktPaJaFkeJaKzI'
-simpleSheet: false
-callback: (jsondata, tabletop) ->
-  data = jsondata
-  data = data['Schools'].elements
-  vizData()
-###
+  key: '1l9ADP29P5u93GW4L9OFLtwF44bNn_uJ7wbpq8k7Pi1Q'
+  simpleSheet: true
+  callback: (jsondata, tabletop) ->
+    data = jsondata
+    #data = data['Schools'].elements
+    vizData()
+    #mapData()
+}
+
 
 # Example GA completion event
 #ga 'Items', 'finished-interactive', 'INTERACTIVE--PROJECT--NAME', 1
@@ -35,13 +36,8 @@ callback: (jsondata, tabletop) ->
   #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
 
 $(window).load ->
-  pymChild = new pym.Child {
-    polling: 500
-  }
-
-  #$('#data-button').click -> $('#data-sources').toggleClass('data-active')
-
-  vizData()
+  #vizData()
+  pymChild = new pym.Child { polling: 500 }
 
 vizData = ->
   $parentEl = $(parentEl)
@@ -52,7 +48,7 @@ vizData = ->
     console.log 'Our data!', data
 
   width = $parentEl.width() #500
-  height = width
+  height = width * 0.6
 
   # Mobile / Desktop breakpoints
   if width > 649
@@ -74,10 +70,11 @@ vizData = ->
       bottom: 4
     mapZoom = 400
 
-  #mapData()
+  mapData()
 
   # Basic D3 visualization skeleton
   
+  ###
   svg = d3.select(parentEl)
     .append('svg')
       .attr('id', 'viz-svg')
@@ -95,4 +92,5 @@ vizData = ->
       x: 10
       y: 10
     }
-  
+  ###
+

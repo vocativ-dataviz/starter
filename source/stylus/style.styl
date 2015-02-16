@@ -1,6 +1,7 @@
 @import 'nib'
-@import 'reset.styl'
-@import 'typography.styl'
+@import 'reset'
+@import 'typography'
+@import 'd3-tip'
 
 /*  Color variables
   ------------------  */
@@ -38,11 +39,14 @@ body
   color $fontcolor
   line-height 1.4em
   font-size 1.2em
-  //max-width 960px
-  max-width 630px
-  padding 8px 8px 12px
+  max-width 960px
+  //max-width 630px
+  //padding 8px 8px 12px
   margin-left auto
   margin-right auto
+  
+svg
+  //border 1px solid #CCC
 
 p
   margin 0.6em 0

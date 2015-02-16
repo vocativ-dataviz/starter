@@ -9,13 +9,6 @@ mapData = ->
 
   numberFormat = d3.format(',d')
 
-  ###
-  if urlQuery.metric is undefined
-    vizMetric = 'atorbelowminimumwagepercapita'
-  else
-    vizMetric = urlQuery.metric
-  ###
-
   vizMetric = 'bullying'
 
   data.forEach (d) ->
@@ -34,7 +27,9 @@ mapData = ->
     .domain metricExtent
     .range colorScaleColors
 
-  # Basic D3 visualization skeleton
+  # Basic D3 map skeleton
+  # Using preserveAspectRatio and viewBox
+  # to make the map responsive
   svg = d3.select(parentEl).append('svg')
     .attr
       width: width + margin.left + margin.right
@@ -45,75 +40,58 @@ mapData = ->
   svg = svg.append('g')
     .attr 'transform', 'translate('+margin.left + ',' + margin.top + ')'
 
-  legend = svg.append('g').attr('class', 'viz-legend')
 
-  gradientId = 'legend-gradient'
+  # Make a legend if we need it
+  makeLegend = ->
+    legend = svg.append('g').attr('class', 'viz-legend')
 
-  defs = legend.append('defs').append('linearGradient')
-    .attr
-      id: gradientId
-      x1: '0%'
-      x2: '100%'
-      y1: '0%'
-      y2: '0%'
+    gradientId = 'legend-gradient'
 
-  defs.append('stop')
-    .attr
-      'class': 'stop1'
-      'offset': '0%'
-      'stop-color': colorScaleColors[0]
+    defs = legend.append('defs').append('linearGradient')
+      .attr
+        id: gradientId
+        x1: '0%'
+        x2: '100%'
+        y1: '0%'
+        y2: '0%'
 
-  defs.append('stop')
-    .attr
-      'class': 'stop2'
-      'offset': '100%'
-      'stop-color': colorScaleColors[1]
+    defs.append('stop')
+      .attr
+        'class': 'stop1'
+        'offset': '0%'
+        'stop-color': colorScaleColors[0]
 
-  ###
-  legend.append('rect')
-    .attr
-      fill: 'url(#'+gradientId+')'
-      x: 50
-      y: -2
-      width: ( width * 0.8 )
-      height: 20
+    defs.append('stop')
+      .attr
+        'class': 'stop2'
+        'offset': '100%'
+        'stop-color': colorScaleColors[1]
 
-  legend.append('text')
-    .text(numberFormat(metricExtent[1]))
-    .attr
-      x: width-45
-      y: 14
-    .style 'text-anchor', 'end'
+    legend.append('rect')
+      .attr
+        fill: 'url(#'+gradientId+')'
+        x: ( width * 0.15 )
+        y: -2
+        width: ( width * 0.69 )
+        height: 20
 
-  legend.append('text')
-    .text(numberFormat(metricExtent[0]))
-    .attr
-      x: 45
-      y: 14
-    .style 'text-anchor', 'end'
-  ###
+    legend.append('text')
+      .text(numberFormat(metricExtent[1]))
+      .attr
+        x: width - ( width * 0.15 ) + 6
+        y: 14
+      .style 'text-anchor', 'start'
 
-  legend.append('rect')
-    .attr
-      fill: 'url(#'+gradientId+')'
-      x: ( width * 0.15 )
-      y: -2
-      width: ( width * 0.69 )
-      height: 20
+    legend.append('text')
+      .text(numberFormat(metricExtent[0]))
+      .attr
+        x: ( width * 0.15 ) - 6
+        y: 14
+      .style 'text-anchor', 'end'
 
-  legend.append('text')
-    .text(numberFormat(metricExtent[1]))
-    .attr
-      x: width - ( width * 0.15 ) + 6
-      y: 14
-    .style 'text-anchor', 'start'
+  makeLegend()
 
-  legend.append('text')
-    .text(numberFormat(metricExtent[0]))
-    .attr
-      x: ( width * 0.15 ) - 6
-      y: 14
-    .style 'text-anchor', 'end'
+
 
   ###
   tip = d3.tip()
@@ -192,33 +170,3 @@ mapData = ->
             '#CCC'
       #.on 'mouseover', tip.show
       #.on 'mouseout', tip.show
-    ###
-      .on 'mouseover', -> tooltip.style 'display', null
-      .on 'mouseout', -> tooltip.style 'display', 'none'
-      .on 'mousemove', (d,i) ->
-        pos = d3.mouse(this)
-        stateAbbr = d.properties['STATE_ABBR']
-        tooltip.attr 'transform', 'translate('+pos[0]+','+pos[1]+')'
-        tipData = stateData[stateAbbr]
-
-        if tipData isnt undefined
-          tooltipText = stateAbbr + ' ' + numberFormat(tipData)
-        else
-          tooltipText = stateAbbr
-
-        tooltip.select('.tooltip-text').text (d,i) ->
-          tooltipText
-
-    tooltip = svg.append('g')
-      .attr('class', 'tooltip')
-      .style('display', 'none')
-
-    tooltip.append('text')
-      .attr 'class', 'tooltip-text'
-      .attr
-        x: -10
-        y: -12
-        dy: '0.35em'
-      .style
-        'text-anchor': 'middle'
-    ###

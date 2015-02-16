@@ -5,32 +5,42 @@ A lightweight starting point to create interactive visualizations of data. Of al
 ## Getting Started
 + Clone starter `git clone https://github.com/Vocativ/dataviz-starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
-+ Install package.json `sudo npm install`
++ Install dependencies from package.json `sudo npm install`
 + Make options.json based on **options.sample.json** `mv options.sample.json options.json`
-+ `subl options.json` and edit the project name and slug for your project
++ `subl options.json` or `open options.json` and edit the project name and slug for your project
 + Remove git history `gulp git-reset`
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
 + `gulp`
-+ Develop
++ **Develop**
 + Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
 + Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT/>
 + Want to run gulp and upload to GitHub whenever you quit? `npm work`
 
 ## Application structure
-This starter is a jumping-off-point for all sorts of different interactive dataviz. It tries to take care of all the things you don't want to think of so you can move quickly, but leaving enough room for anything to be possible. 
-
-#### /coffee/app.coffee
-This is the main file for the app, where initial variables are defined, data is loaded, and the proper function to visualize the data is called. 
-
-#### /coffee/map.coffee
-If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable. You will need to modify the code to properly accept whatever shape your data is in.
+This starter is a jumping-off-point for all sorts of different interactive dataviz. It tries to take care of all the things you don't want to think of so you can move quickly, but leaving enough room for anything to be possible.
 
 #### /stylus/style.styl
 The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file.
 
 #### /mustache/partials/body.mustache
 This is the only HTML file you need to be modifying, in most cases.
+
+#### /coffee/app.coffee
+This is the main file for the app, where initial variables are defined, data is loaded, and the proper function to visualize the data is called. 
+
+#### /coffee/templates/
+These templates are ignored when .coffee files are compiled into app.js - app.coffee sets up the data, and these templates define *vizData()* or *mapData()* or other future functions which do things with that data. Use one of these templates by moving it into the main **/coffee/** directory.
+
+**us-state-choropleth.coffee**
+If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable. You will need to modify the code to properly accept whatever shape your data is in.
+
+## Maps
+You can find a template for a global map here: <https://docs.google.com/spreadsheets/d/1_0cgcqu2dzbo13Qwtlfjndpf5O6dH9RgOCAT5CUPlUI/edit?usp=sharing>
+
+You can find a template for a numerical choropleth map here: <https://docs.google.com/spreadsheets/d/1l9ADP29P5u93GW4L9OFLtwF44bNn_uJ7wbpq8k7Pi1Q/edit?usp=sharing>
+
+You can find a template for a categorical choropleth map here: <https://docs.google.com/spreadsheets/d/1cuVwb3ufNvTNgXCXeeOXTz5NEieZOsKx0tcmE7_30EM/edit?usp=sharing>
 
 ## So you wanna deploy an interactive?
 Follow this basic checklist!
@@ -83,7 +93,7 @@ The files in **/mustache/** are mustache templates/partials. The variables for t
 
 
 ## What gulpfile.coffee does
-+ Removes **.git** and moves **PROJECT_README.md** to **README.md** to initialize a new project with `gulp git-reset`
++ `gulp git-reset`: removes **.git** and moves **PROJECT_README.md** to **README.md** to initialize a new project
 + **/mustache/** is compiled into **/build/index.html**
 + **/stylus/style.styl** is compiled into **build/style.css**
 + **/coffee/** is compiled into **/build/app.js**

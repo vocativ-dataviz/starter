@@ -19,13 +19,13 @@ if options.website.port isnt ''
 
 # --- Tasks --- #
 gulp.task "default", [
-  "watch"
   "coffee"
   "stylus"
   "js"
   "mustache"
   "data"
   "img"
+  "watch"
   "webserver"  
 ], -> gulp
 
@@ -40,20 +40,21 @@ gulp.task 'git-reset', plugins.shell.task([
   'git init',
   'rm README.md',
   'mv PROJECT_README.md README.md'
+  'subl options.json'
 ])
 
 # Lint coffeescript for errors
 gulp.task "lint", ->
-  gulp.src("./coffee/*.coffee")
+  gulp.src("./source/coffee/*.coffee")
   .pipe plugins.coffeelint()
   .pipe plugins.coffeelint.reporter()
 
 # Compile coffeescript
 gulp.task "coffee", ["lint"], ->
-  gulp.src("./coffee/*.coffee")
-  .pipe plugins.sourcemaps.init()
+  gulp.src("./source/coffee/*.coffee")
+  #.pipe plugins.sourcemaps.init()
   .pipe plugins.coffee(bare: true).on('error', plugins.util.log)  
-  .pipe plugins.sourcemaps.write()
+  #.pipe plugins.sourcemaps.write()
   .pipe plugins.uglify()
   .pipe plugins.concat("app.js")  
   .pipe plugins.filesize()
@@ -61,7 +62,7 @@ gulp.task "coffee", ["lint"], ->
 
 # Compile stylus to CSS
 gulp.task "stylus", ->
-  gulp.src("./stylus/style.styl")
+  gulp.src("./source/stylus/style.styl")
   .pipe plugins.stylus(use: [nib()])
   .pipe plugins.mincss(keepBreaks: true)
   .pipe plugins.filesize()
@@ -69,11 +70,11 @@ gulp.task "stylus", ->
 
 # Compile mustache partials to HTML
 gulp.task "mustache", ->
-  gulp.src(["./mustache/*.mustache"])
+  gulp.src(["./source/mustache/*.mustache"])
   .pipe(plugins.mustache(options, {},
-    header: "./mustache/partials/header.mustache"
-    body: "./mustache/partials/body.mustache"
-    footer: "./mustache/partials/footer.mustache"
+    header: "./source/mustache/partials/header.mustache"
+    body: "./source/mustache/partials/body.mustache"
+    footer: "./source/mustache/partials/footer.mustache"
   ))
   .pipe(plugins.rename(extname: ".html"))
   .pipe(plugins.htmlmin(
@@ -89,7 +90,7 @@ gulp.task "mustache", ->
 
 # Concat and uglify vendor JS files
 gulp.task "js", ->
-  gulp.src("./javascript/*.js")
+  gulp.src("./source/javascript/*.js")
   .pipe plugins.uglify()
   .pipe plugins.concat("lib.js")
   .pipe plugins.filesize()
@@ -105,13 +106,13 @@ gulp.task "prefix", ->
 
 # Copy data files (CSV & JSON) from /data/ to /build/data/
 gulp.task "data", ->
-  gulp.src(["./data/*.csv", "./data/*.json"])
+  gulp.src(["./source/data/*.csv", "./source/data/*.json"])
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/data/")
 
 # Copy images (.png and .svg) from /img/ to /build/img/
 gulp.task "img", ->
-  gulp.src(["./img/*.svg", "./img/*.png"])
+  gulp.src(["./source/img/*.svg", "./source/img/*.png"])
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/img/")
 
@@ -158,27 +159,27 @@ gulp.task "webserver", ->
 
 # Watch files for changes and livereload when detected
 gulp.task "watch", ->
-  watch "coffee/*.coffee", {name: 'Coffee'}, (events, done) ->
+  watch "source/coffee/*.coffee", {name: 'Coffee'}, (events, done) ->
     gulp.start "coffee"
     done()
 
-  watch "stylus/*.styl", {name: 'Stylus'}, (events, done) ->
+  watch "source/stylus/*.styl", {name: 'Stylus'}, (events, done) ->
    gulp.start "stylus"
    done()
 
-  watch [ "mustache/*", "mustache/partials/*" ], {name: 'Mustache'}, (events, done) ->
+  watch [ "source/mustache/*", "source/mustache/partials/*" ], {name: 'Mustache'}, (events, done) ->
    gulp.start "mustache"
    done()
 
-  watch "javascript/*", {name: 'Vendor JS'}, (events, done) ->
+  watch "source/javascript/*", {name: 'Vendor JS'}, (events, done) ->
     gulp.start "js"
     done()
 
-  watch "data/*", {name: 'Vendor JS'}, (events, done) ->
+  watch "source/data/*", {name: 'Vendor JS'}, (events, done) ->
     gulp.start "data"
     done()
 
-  watch "img/*", {name: 'Vendor JS'}, (events, done) ->
+  watch "source/img/*", {name: 'Vendor JS'}, (events, done) ->
     gulp.start "img"
     done()
 
