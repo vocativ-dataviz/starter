@@ -24,7 +24,6 @@ Tabletop.init {
     data = jsondata
     #data = data['Schools'].elements
     vizData()
-    #mapData()
 }
 
 
@@ -70,11 +69,9 @@ vizData = ->
       bottom: 4
     mapZoom = 400
 
-  mapData()
+  #mapData()
 
-  # Basic D3 visualization skeleton
-  
-  ###
+  # Basic D3 visualization skeleton  
   svg = d3.select(parentEl)
     .append('svg')
       .attr('id', 'viz-svg')
@@ -92,5 +89,5 @@ vizData = ->
       x: 10
       y: 10
     }
-  ###
+  
 
