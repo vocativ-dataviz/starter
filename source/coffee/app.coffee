@@ -22,6 +22,8 @@ Tabletop.init {
   simpleSheet: true
   callback: (jsondata, tabletop) ->
     data = jsondata
+    # If you have multiple worksheets, make `simpleSheet: false`
+    # If simpleSheet is false, specify the sheet to use here
     #data = data['Schools'].elements
     vizData()
 }
