@@ -5,24 +5,11 @@
 
 /*  Color variables
   ------------------  */
-
 $fontcolor = #333333
 $bgcolor = white
 
-/* Highlight color, when user selects text */
-$highlight = #FFF9A2
-
 /* Link color, hover/visited will be generated from this */
 $linkcolor = #112582
-
-/* Selection colours (easy to forget) */
-::selection     {background: $highlight}
-::-moz-selection  {background: $highlight}
-img::selection    {background: transparent}
-img::-moz-selection {background: transparent}
-body {-webkit-tap-highlight-color: $highlight}
-
-em { background: rgba($highlight, 0.5) }
 
 // ------------------ 
 
@@ -55,10 +42,7 @@ a
   &:link
     color $linkcolor
 
-  &:hover
-    color $linkcolor
-
-  &:visited
+  &:visited, &:hover
     color $linkcolor
 
 section

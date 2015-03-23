@@ -1,6 +1,18 @@
 $forza = 'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif;
 $sans = 'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
+/* Highlight color, when user selects text */
+$highlight = #FFF9A2
+
+/* Selection colours (easy to forget) */
+::selection     {background: $highlight}
+::-moz-selection  {background: $highlight}
+img::selection    {background: transparent}
+img::-moz-selection {background: transparent}
+body {-webkit-tap-highlight-color: $highlight}
+
+em { background: rgba($highlight, 0.5) }
+
 h1,h2,h3,h4,h5
   font-family $forza
 
