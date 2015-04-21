@@ -12,6 +12,7 @@ A lightweight starting point to create interactive visualizations of data. Of al
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
 + `gulp`
++ Sometimes things don't work properly the first time around, if this happens, just `gulp` again
 + **Develop**
 + Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
 + Ready to deploy? `gulp publish` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT/>
@@ -30,7 +31,9 @@ This is the only HTML file you need to be modifying, in most cases.
 This is the main file for the app, where initial variables are defined, data is loaded, and the proper function to visualize the data is called. 
 
 #### /coffee/templates/
-These templates are ignored when .coffee files are compiled into app.js - app.coffee sets up the data, and these templates define *vizData()* or *mapData()* or other future functions which do things with that data. Use one of these templates by moving it into the main **/coffee/** directory.
+These templates are ignored by default when .coffee files are compiled into **app.js**. 
+
+**app.coffee** sets up the data, and these templates define *vizData()* or *mapData()* or other future functions which do things with that data. Use one of these templates by moving it into the main **/coffee/** directory.
 
 **us-state-choropleth.coffee**
 If you'd like to map some data, this file defines the mapData() function which automatically pulls data from the **data** variable. You will need to modify the code to properly accept whatever shape your data is in.

@@ -1,13 +1,18 @@
-# Create a categorical scale with Vocativ's dataviz colors
-vocCatScale = d3.scale.ordinal()
-  .range(['#FB514E', '#2d82ca', '#49af37', '#9065c8'])
-
+# Init variables with defaults
 data = null
 width = 0
 height = 0
 mapZoom = 0
 margin = {}
 parentEl = '#viz-content'
+
+# Create a categorical scale with Vocativ's dataviz colors
+vocCatScale = d3.scale.ordinal()
+  .range(['#FB514E', '#2d82ca', '#49af37', '#9065c8'])
+
+############################
+# Options for loading data #
+############################
 
 # Load data from CSV
 ###
@@ -37,7 +42,7 @@ Tabletop.init {
   #ga 'Items', 'click-interactive', 'DESCRIPTION--OF--CLICK', 1
 
 $(window).load ->
-  #vizData()
+  # Init PYM.js on page load
   pymChild = new pym.Child { polling: 500 }
 
 vizData = ->

@@ -1,24 +1,7 @@
-###
-
-Expects data from a spreadsheet/CSV that looks like
-
-State Name | State Abbr | vizMetric
------------------------------------
-New York   |     NY     |   1.5
-California |     CA     |   4.5
-
-etc.. etc..
------------------------------------
-
-###
-
 mapData = ->
-
   # Rewrite height/width with margins for visualization
   #height = height - margin.top - margin.bottom
   #width = width - margin.left - margin.right
-
-  vizMetric = 'metric'
 
   stateData = {}
 
@@ -26,10 +9,10 @@ mapData = ->
 
   numberFormat = d3.format(',d')
 
-  metrics = _.keys data[0]
+  vizMetric = 'bullying'
 
   data.forEach (d) ->
-    #console.log 'foreach d', d
+    #console.log 'foreach d', d, d[vizMetric]
     stateData[d.stateabbr] = d[vizMetric]
 
   console.log 'we built stateData! ', stateData
@@ -45,7 +28,8 @@ mapData = ->
     .range colorScaleColors
 
   # Basic D3 map skeleton
-  # Using preserveAspectRatio and viewBox to make the map responsive
+  # Using preserveAspectRatio and viewBox
+  # to make the map responsive
   svg = d3.select(parentEl).append('svg')
     .attr
       width: width + margin.left + margin.right
@@ -56,10 +40,11 @@ mapData = ->
   svg = svg.append('g')
     .attr 'transform', 'translate('+margin.left + ',' + margin.top + ')'
 
+
   # Make a legend if we need it
   makeLegend = ->
     legend = svg.append('g').attr('class', 'viz-legend')
-    
+
     gradientId = 'legend-gradient'
 
     defs = legend.append('defs').append('linearGradient')
@@ -89,7 +74,6 @@ mapData = ->
         y: -2
         width: ( width * 0.69 )
         height: 20
-    
 
     legend.append('text')
       .text(numberFormat(metricExtent[1]))
@@ -104,19 +88,45 @@ mapData = ->
         x: ( width * 0.15 ) - 6
         y: 14
       .style 'text-anchor', 'end'
-  
+
   makeLegend()
 
-  
+  ###
   tip = d3.tip()
     .attr('class', 'd3-tip')
-    .html (d) -> 
-      +stateData[d.properties['STATE_ABBR']]
+    .html (d) ->
+      #pos = d3.mouse(this)
+      #tooltip.attr 'transform', 'translate('+pos[0]+','+pos[1]+')'
+      stateAbbr = d.properties['STATE_ABBR']
+
+      tipData = stateData[stateAbbr]
+
+      tipNumberFormat = d3.format(",d")
+
+      if tipData isnt undefined
+        if tipNumberFormat(tipData) isnt ''
+          tooltipText = '<h4>'+stateAbbr + '</h4> <p><strong>'
+          tooltipText += tipNumberFormat(tipData) + '</strong>'
+        else
+          tooltipText = '<h4>'+stateAbbr + '</h4> <p><strong>'
+          tooltipText += tipData + '</strong>'
+
+        tooltipText += '<br><small>'
+
+        if urlQuery.labeltext isnt undefined
+          tooltipText += ' '+urlQuery.labeltext
+
+        tooltipText += '</small></p>'
+      else
+        tooltipText = stateAbbr
+
+      tooltipText
 
   svg.call tip
-  
+  ###
 
   d3.json 'data/USA.json', (us) ->
+
     $('#content').css('background-image', '')
 
     subunits = topojson.feature(us, us.objects.usStates)
@@ -145,21 +155,16 @@ mapData = ->
       .style 'stroke-width', 1
       .style 'fill', 'white'
       .style 'fill', (d,i) ->
-        stateAbbr = d.properties['STATE_ABBR']
-        #state = _.find STATES, (state) -> state[1] is stateAbbr
+        state = d.properties['STATE_ABBR']
+        #console.log 'statedata!', state, stateData[d.properties['STATE_ABBR']]
 
-        metricColorScale +stateData[d.properties['STATE_ABBR']]
-                
-        ###
-        Use this for binary data 
-        (either a state has a property or it doesn't)
-
+        #metricColorScale +stateData[d.properties['STATE_ABBR']]
         thisStateData = stateData[d.properties['STATE_ABBR']]
+        console.log 'state!', state, thisStateData
         if thisStateData isnt undefined
           if thisStateData is 'x'
-            vocCatScale[0]
+            'red'
           else
             '#CCC'
-        ####
-      .on 'mouseover', tip.show
-      .on 'mouseout', tip.show
+      #.on 'mouseover', tip.show
+      #.on 'mouseout', tip.show
