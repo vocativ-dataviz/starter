@@ -34,7 +34,7 @@ These templates are ignored by default when .coffee files are compiled into **ap
 
 **app.coffee** sets up the data, and these templates define *charts.mapUSData()* or other future chart functions which visualize with that data.
 
-** /templates/app.us-map.coffee **
+#### /templates/app.us-map.coffee
 + Function defined: **charts.mapUSData()**
 If you'd like to map some data, this file defines the US map function which automatically pulls data from the **data** variable. The code will need to be modified to switch between numerical and categorical choropleth maps.
 
