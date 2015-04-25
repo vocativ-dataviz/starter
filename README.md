@@ -3,7 +3,7 @@
 A lightweight starting point to create interactive visualizations of data. Of all sorts (besides maps, which has it's own starter). (Charts, graphs, apps, tools)
 
 ## Getting Started
-+ Clone starter `git clone https://github.com/Vocativ/dataviz-starter.git NEW-PROJECT`
++ Clone starter `git clone https://github.com/vocativ-dataviz/starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
 + Install dependencies from package.json `sudo npm install`
 + Make options.json based on **options.sample.json** `mv options.sample.json options.json`
