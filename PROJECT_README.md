@@ -2,7 +2,7 @@
 Description of what this repo/project is to be used for
 
 # How to deploy
-`gulp publish` will push **/build/** to S3
+`gulp s3` will push **/build/** to S3
 
 # How to develop
 `gulp` will compile coffeescript, stylus, etc and run local webserver
