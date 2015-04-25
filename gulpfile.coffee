@@ -35,12 +35,11 @@ gulp.task "mirror", [
 ], -> gulp
 
 # Remove previous git data and init fresh
-gulp.task 'git-reset', plugins.shell.task([
+gulp.task 'init', plugins.shell.task([
   'rm -rf .git',
   'git init',
   'rm README.md',
   'mv PROJECT_README.md README.md'
-  'subl options.json'
 ])
 
 # Lint coffeescript for errors
@@ -55,7 +54,15 @@ gulp.task "coffee", ["lint"], ->
   #.pipe plugins.sourcemaps.init()
   .pipe plugins.coffee(bare: true).on('error', plugins.util.log)  
   #.pipe plugins.sourcemaps.write()
-  .pipe plugins.uglify()
+  .pipe plugins.if(->
+    if options.project.development
+      plugins.util.log 'Development mode'
+      return false
+    else
+      plugins.util.log 'Production mode'
+      return true
+  , plugins.uglify())
+  #.pipe plugins.uglify()
   .pipe plugins.concat("app.js")  
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
@@ -83,16 +90,14 @@ gulp.task "mustache", ->
     removeAttributeQuotes: true
     removeScriptTypeAttributes: true
     removeStyleLinkTypeAttributes: true
-    minifyJS: true
-    minifyCSS: true
   ))
   .pipe gulp.dest("./build/")
 
 # Concat and uglify vendor JS files
 gulp.task "js", ->
   gulp.src("./source/javascript/*.js")
-  .pipe plugins.uglify()
   .pipe plugins.concat("lib.js")
+  .pipe plugins.uglify()  
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
@@ -122,7 +127,7 @@ gulp.task 'github', ->
     .pipe plugins.github()
 
 # Publish to S3
-gulp.task 'publish', ->
+gulp.task 's3', ->
   publisher = plugins.s3.create {
     key: options.aws.key
     secret: options.aws.secret
@@ -175,11 +180,11 @@ gulp.task "watch", ->
     gulp.start "js"
     done()
 
-  watch "source/data/*", {name: 'Vendor JS'}, (events, done) ->
+  watch "source/data/*", {name: 'Data'}, (events, done) ->
     gulp.start "data"
     done()
 
-  watch "source/img/*", {name: 'Vendor JS'}, (events, done) ->
+  watch "source/img/*", {name: 'Images'}, (events, done) ->
     gulp.start "img"
     done()
 
