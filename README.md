@@ -2,6 +2,23 @@
 
 A lightweight starting point to create interactive visualizations of data. Of all sorts (besides maps, which has it's own starter). (Charts, graphs, apps, tools)
 
+## Prerequisites
+On OS X 10.9, aka Mavericks, be sure to have the following libraries installed:
+
++ [Homebrew](http://brew.sh/): OS X package manager
++ [Node.js](https://nodejs.org/): JavaScript framework
++ [Gulp.js](http://gulpjs.com/): streaming build system
++ [Coffeescript](http://coffeescript.org/): JavaScript preprocessor
++ [Stylus](https://learnboost.github.io/stylus/): CSS preprocessor
+
+Copy and paste the following code into your terminal if you're starting on a fresh machine that does not have any of those prerequisites.
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install node
+npm install -g coffee-script gulp stylus
+```
+
 ## Getting Started
 + Clone starter `git clone https://github.com/vocativ-dataviz/starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
