@@ -1,39 +1,39 @@
 title,body,labels
-Browser testing: IE11,,
-Browser testing: Latest Firefox,,
-Browser testing: Latest Chrome,,
+Add project to team projects list,,Launch TODO
+Add proper byline(s),,Launch TODO
+Analytics: add "finished-interactive" event,, Launch TODO
+Analytics: Double-check analytics code,,Launch TODO
+Analytics: test GA interactive-click events,,Launch TODO
 Browser testing: Desktop Safari,,
-Device testing: iPhone Safari,,
-Device testing: iPhone Chrome/Webkit,,
-Device testing: iPhone in-app browser,"Use Pinboard to privately bookmark stage, use iOS Pinboard client to visit the site",
-Device testing: iPad,,
+Browser testing: IE11,,
+Browser testing: Latest Chrome,,
+Browser testing: Latest Firefox,,
+Data: Add data download,Original source? Cleaned spreadsheet,
+Deploy build to S3,,Launch TODO
 Device testing: Android phone,,
 Device testing: Android tablet,,
-Data: Add data download,Original source? Cleaned spreadsheet,
-Analytics: Double-check analytics code,,Launch TODO
-Write the team blog post,,Launch TODO
-Add project to team projects list,,Launch TODO
-Email media relations re: press releases,,Launch TODO
-Schedule iteration reviews,,Project Management
-Schedule sprint planning meetings,,Project Management
-Schedule sprint retrospectives,,Project Management
-Setup Slack hook on github,,Project Management
-Let the copy desk know an app is coming,,
-Make sure the copy desk is happy,,Launch TODO
-Let the growth team know an app is coming,"A week or so before launch give them a link, a walkthrough and discuss headlines and teasers",
-Run the app through Google Page Speed,http://developers.google.com/speed/pagespeed/insights/,
-Update project meta description,It's in the copytext document. This gets indexed by Google.,Launch TODO
-Verify page title tags are good,,Launch TODO
-Implement completion GA event,"Could be implemented based on scroll depth, slide progress or something else",
-Make promotion plans with the social media team,Email growth editors,Project Management
-Draft tweets for growth team,,Launch TODO
+Device testing: iPad,,
+Device testing: iPhone Chrome/Webkit,,
+Device testing: iPhone in-app browser,"Use Pinboard to privately bookmark stage, use iOS Pinboard client to visit the site",
+Device testing: iPhone Safari,,
 Draft Facebook post for growth team,,Launch TODO
-Deploy build to S3,,Launch TODO
-Place pym.js into the CMS post,,Launch TODO
-Analytics: test GA interactive-click events,,Launch TODO
-Analytics: add "finished-interactive" event,, Launch TODO
+Draft tweets for growth team,,Launch TODO
+Email media relations re: press releases,,Launch TODO
+Growth: review headlines & copy text,,Launch TODO
 Growth: update Facebook Open Graph tags,Images should have an aspect ratio of 1.91:1 and be a minimum of 1200 x 630. Verify with debugger: https://developers.facebook.com/tools/debug/,Launch TODO
 Growth: update Twitter Card tags,Validator: https://dev.twitter.com/docs/cards/validation/validator,Launch TODO
 Growth: update Twitter/Facebook links,,Launch TODO
-Growth: review headlines & copy text,,Launch TODO
-Add proper byline(s),,Launch TODO
+Implement completion GA event,"Could be implemented based on scroll depth, slide progress or something else",
+Let the growth team know an app is coming,"A week or so before launch give them a link, a walkthrough and discuss headlines and teasers",
+Make promotion plans with the social media team,Email growth editors,Project Management
+Make sure the copy desk is happy,,Launch TODO
+Place pym.js into the CMS post,,Launch TODO
+Run the app through Google Page Speed,http://developers.google.com/speed/pagespeed/insights/,
+Schedule iteration reviews,,Project Management
+Schedule sprint planning meetings,,Project Management
+Schedule sprint retrospectives,,Project Management
+Setup Asana hook on Asana,,Project Management
+Setup Slack hook on Github,,Project Management
+Update project meta description,It's in the copytext document. This gets indexed by Google.,Launch TODO
+Verify page title tags are good,,Launch TODO
+Write the team blog post,,Launch TODO
