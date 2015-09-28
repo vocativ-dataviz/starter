@@ -58,6 +58,7 @@ If you'd like to map some data, this file defines the US map function which auto
 ## Maps
 + You can find a template for a categorical choropleth map here: <https://docs.google.com/spreadsheets/d/1cuVwb3ufNvTNgXCXeeOXTz5NEieZOsKx0tcmE7_30EM/edit?usp=sharing>
 + You can find a template for a global map here: <https://docs.google.com/spreadsheets/d/1oMRYb286BTn8TuHzUwtlpuBNVVF53jrhO0rE0oRbrS8/edit?usp=sharing>
++ You can find a template to give to reporters for global maps here. **DO NOT EDIT**: <https://docs.google.com/spreadsheets/d/1p80WKmJ0H_utSGYaJPaGW8ZO2aDieBGFjYjMKBBk_5Q/edit?usp=sharing>
 + You can find a template for a numerical choropleth map here: <https://docs.google.com/spreadsheets/d/1l9ADP29P5u93GW4L9OFLtwF44bNn_uJ7wbpq8k7Pi1Q/edit?usp=sharing>
 
 # So you wanna deploy an interactive?
