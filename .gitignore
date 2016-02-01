@@ -1,6 +1,6 @@
 build/
 node_modules/
-vendor/
+src/js/*
 .DS_Store
 options.json
 *.log

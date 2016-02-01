@@ -16,13 +16,13 @@ Copy and paste the following code into your terminal if you're starting on a fre
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install node
-npm install -g coffee-script gulp stylus
+npm install -g coffee-script gulp stylus bower
 ```
 
 ## Getting Started
 + Clone starter `git clone https://github.com/vocativ-dataviz/starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
-+ Install dependencies from package.json `sudo npm install`
++ Install dependencies from package.json & bower.json `npm install`
 + Make options.json based on **options.sample.json** `mv options.sample.json options.json`
 + `subl options.json` and **edit the project name and slug for your project**
 + Remove git history `gulp init`
