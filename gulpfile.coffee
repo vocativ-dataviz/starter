@@ -2,9 +2,10 @@
 gulp = require("gulp")
 plugins = require("gulp-load-plugins")({
   rename: {
+    'gulp-awspublish': 's3'
+    'gulp-gh-pages': 'github'
     'gulp-minify-css': 'mincss'
     'gulp-mustache-plus': 'mustache'
-    'gulp-gh-pages': 'github'
   }
 })
 nib = require("nib")
@@ -126,6 +127,30 @@ gulp.task "img", ->
 gulp.task 'github', ->
   gulp.src('./build/**/*')
     .pipe plugins.github()
+
+# Publish to S3
+gulp.task 's3', ->
+  publisher = plugins.s3.create {
+    key: options.aws.key
+    secret: options.aws.secret
+    bucket: options.aws.bucket
+  }
+
+  headers = {
+    'Cache-Control': 'max-age=315360000, no-transform, public'
+  }
+
+  gulp.src(['./build/**'])
+  .pipe plugins.rename (path) ->
+    path.dirname = '/'+options.project.slug+'/'+path.dirname+'/'
+    return path
+  #.pipe plugins.s3.gzip({ ext: '.gz' })
+  .pipe publisher.publish()
+  .pipe publisher.sync()
+  .pipe publisher.cache()
+  .pipe plugins.s3.reporter({
+    states: ['create', 'update', 'delete']
+  })
 
 # Start a local webserver for development
 gulp.task "webserver", ->

@@ -20,13 +20,13 @@ Follow this basic checklist!
     - [ ] Do they have good share text/headlines in them?
     - [ ] Does each share button have share images attached with proper proportions?
 - [ ] Is the piece deployed correctly?
-    - [ ] The slug and host in **options.json** have been double-checked
+    - [ ] The slug and host in **options.js** have been double-checked
     - [ ] /build/ has been deployed to S3
     - [ ] Is pym.js installed correctly in the post / CMS?
     - [ ] Is pym enabled properly in the app? (and called after load)
     - [ ] Is the post embed referencing Amazon S3 and *not GitHub*?
 - [ ] Have the analytics & testing been set up properly?
-    - [ ] Is the GA UA code defined in **options.json**?
+    - [ ] Is the GA UA code defined in **options.js**?
     - [ ] Is the GA code set up properly in **mustache/partials/header.mustache**?
     - [ ] Does the page emit **interactive-click** events on click?
     - [ ] Has A/B testing code (VWO) are enabled?

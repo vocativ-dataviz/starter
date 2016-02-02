@@ -15,14 +15,16 @@
     "type": "git",
     "url": "https://github.com/vocativ-dataviz/starter.git"
   },
-  "author": "ejfox@vocativ.com",
+  "author": "EJ Fox <ejfox@vocativ.com>",
+  "contributors": "Gerald Rich <grich@vocativ.com>",
   "bugs": {
     "url": "https://github.com/vocativ-dataviz/starter/issues"
   },
   "homepage": "https://github.com/Vocativ/dataviz-starter",
-  "devDependencies": {
+  "dependencies": {
     "coffee-script": "*",
     "gulp": "*",
+    "gulp-awspublish": "*",
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-concat": "*",

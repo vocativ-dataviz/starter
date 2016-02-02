@@ -23,8 +23,8 @@ npm install -g coffee-script gulp stylus bower
 + Clone starter `git clone https://github.com/vocativ-dataviz/starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
 + Install dependencies from package.json & bower.json `npm install`
-+ Make options.json based on **options.sample.json** `mv options.sample.json options.json`
-+ `subl options.json` and **edit the project name and slug for your project**
++ Make options.js based on **options.sample.json** `mv options.sample.json options.js`
++ `subl options.js` and **edit the project name and slug for your project**
 + Remove git history `gulp init`
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
@@ -69,13 +69,13 @@ Follow this basic checklist!
     - [ ] The original source?
     - [ ] A cleaned Google Spreadsheet? (Make sure it can't be edited)
 - [ ] Is the piece deployed correctly?
-    - [ ] The slug and host in **options.json** have been double-checked
+    - [ ] The slug and host in **options.js** have been double-checked
     - [ ] /build/ has been deployed to S3
     - [ ] Is pym.js installed correctly in the post / CMS?
     - [ ] Is pym enabled properly in the app? (and called after load)
     - [ ] Is the post embed referencing Amazon S3 and *not GitHub*?
 - [ ] Have the analytics & testing been set up properly?
-    - [ ] Is the GA UA code defined in **options.json**?
+    - [ ] Is the GA UA code defined in **options.js**?
     - [ ] Is the GA code set up properly in **mustache/partials/header.mustache**?
     - [ ] Does the page emit **interactive-click** events on click?
     - [ ] Is there a function in the app to trigger **finished-interactive**?
@@ -105,7 +105,7 @@ To deploy to gh-pages, run `gulp github`
 
 To deploy to S3, run `gulp publish`
 
-The files in **/mustache/** are mustache templates/partials. The variables for those templates are defined in **/options.json**
+The files in **/mustache/** are mustache templates/partials. The variables for those templates are defined in **/options.js**
 
 
 ## What gulpfile.coffee does
