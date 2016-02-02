@@ -24,6 +24,7 @@
   "dependencies": {
     "coffee-script": "*",
     "gulp": "*",
+    "gulp-awspublish": "*",
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-concat": "*",
@@ -40,7 +41,6 @@
     "gulp-plumber": "*",
     "gulp-prefix": "*",
     "gulp-rename": "*",
-    "gulp-s3": "*",
     "gulp-shell": "*",
     "gulp-sourcemaps": "*",
     "gulp-stylus": "*",
@@ -48,6 +48,7 @@
     "gulp-util": "*",
     "gulp-watch": "*",
     "gulp-webserver": "*",
+    "merge-stream": "*",
     "nib": "*",
     "stylus": "*"
   }
