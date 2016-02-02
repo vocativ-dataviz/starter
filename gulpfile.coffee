@@ -1,6 +1,5 @@
 "use strict"
 gulp = require("gulp")
-merge = require("merge-stream")
 plugins = require("gulp-load-plugins")({
   rename: {
     'gulp-awspublish': 's3',
@@ -136,7 +135,7 @@ gulp.task 's3', ->
     'accessKeyId': options.aws.key
     'secretAccessKey': options.aws.secret
     'params': {
-      'Bucket': options.awss.bucket
+      'Bucket': options.aws.bucket
     }
   }
 
@@ -144,48 +143,17 @@ gulp.task 's3', ->
     'Cache-Control': 'max-age=315360000, no-transform, public'
 
   uploadOptions =
-    's3.path': 'vv/int/'
-
-# you can use a filter to source only files you want gzipped
-  gzipFilter = [
-    'build/*.js'
-    'public/*.html'
-    'public/*.css'
-  ]
-
-# it's a good idea to create an inverse filter to avoid uploading duplicates
-# see https://github.com/wearefractal/vinyl-fs#srcglobs-opt for more details
-  plainFilter = [
-    'build/*'
-    '!build/*.js'
-    '!build/*.html'
-    '!build/*.css'
-  ]
-
-  gzip = gulp.src(gzipFilter).pipe(plugins.s3.gzip({ ext: '.gz' }))
-  plain = gulp.src plainFilter
-
-  # use the merge-stream plugin to merge the gzip and plain files and upload
-  # them together
-  merge(gzip, plain)
-    .pipe publisher.cache()
-    .pipe publisher.publish(uploadHeaders, uploadOptions) 
-    # now when you sync files of the other type will not be deleted
-    .pipe publisher.sync()
-    .pipe publisher.cache()
-    .pipe plugins.s3.reporter()
+    's3.path': 'vv/'
 
   gulp.src(['./build/**'])
-  .pipe plugins.rename (path) ->
-    path.dirname = '/vv/'+ options.project.slug + '/' + path.dirname + '/'
-    return path
-  #.pipe plugins.s3.gzip({ ext: '.gz' })
-  .pipe publisher.publish()
-  .pipe publisher.sync()
-  .pipe publisher.cache()
-  .pipe plugins.s3.reporter({
-    states: ['create', 'update', 'delete']
-  })
+    .pipe plugins.rename (path) ->
+      path.dirname = 'vv/' + options.project.slug + '/' + path['dirname'] + '/'
+      return path
+    .pipe publisher.publish(uploadHeaders, uploadOptions)
+    .pipe publisher.cache()
+    .pipe plugins.s3.reporter({
+      states: ['create', 'update', 'delete']
+    })
 
 # Start a local webserver for development
 gulp.task "webserver", ->

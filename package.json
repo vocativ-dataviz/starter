@@ -48,7 +48,6 @@
     "gulp-util": "*",
     "gulp-watch": "*",
     "gulp-webserver": "*",
-    "merge-stream": "*",
     "nib": "*",
     "stylus": "*"
   }
