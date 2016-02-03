@@ -29,10 +29,13 @@ gulp.task "default", [
   "webserver"  
 ], -> gulp
 
-gulp.task "mirror", [
+gulp.task "staging", [
   "github"
-  "publish"
 ], -> gulp
+
+gulp.task "production", [
+  "s3"
+], ->
 
 # Remove previous git data and init fresh
 gulp.task 'init', plugins.shell.task([
@@ -41,19 +44,19 @@ gulp.task 'init', plugins.shell.task([
   'rm README.md',
   'mv PROJECT_README.md README.md',
   'npm install',
-  'bower install',
+  'gulp bower',
   'gulp namespace'
 ])
 
 gulp.task "namespace", ->
   stylNamespace = 'div#vv-' + options.project.slug + '\n'
-  jsNamespace = 'parentEl = \'' + stylNamespace + '\''
+  jsNamespace = 'parentEl = \'div#vv-' + options.project.slug + '\'\n'
   console.log('parent viz element:', stylNamespace)
   gulp.src('./src/coffee/app.coffee')
     .pipe plugins.insert.prepend(jsNamespace)
     .pipe gulp.dest('./src/coffee')
   gulp.src('./src/styl/style.styl')
-    .pipe plugins.insert.prepend(stylNamespace)
+    .pipe plugins.insert.append(stylNamespace)
     .pipe gulp.dest('./src/styl')
 
 # Lint coffeescript for errors
@@ -107,17 +110,17 @@ gulp.task "mustache", ->
   ))
   .pipe gulp.dest("./build/")
 
+# Bower installs entire repos of js dependencies.
+# Grab only what you need
+gulp.task 'bower', ->
+  plugins.shell.task([
+    'bower install',
+    'bower-installer'
+  ])
+
 # Concat and uglify vendor JS files
 gulp.task "js", ->
-  gulp.src([
-    "./src/js/jquery/dist/jquery.js",
-    "./src/js/lodash/dist/lodash.js",
-    "./src/js/d3/d3.js",
-    "./src/js/d3-tip/index.js",
-    "./src/js/topojson/topojson.js",
-    "./src/js/tabletop/src/tabletop.js",
-    "./src/js/pym.js/dist/pym.js",
-   ])
+  gulp.src 'src/js/lib/**/*.js'
   .pipe plugins.concat("lib.js")
   .pipe plugins.uglify()  
   .pipe plugins.filesize()
@@ -147,7 +150,7 @@ gulp.task 's3', ->
     'accessKeyId': options.aws.key
     'secretAccessKey': options.aws.secret
     'params': {
-      'Bucket': options.aws.bucket
+      'Bucket': 'interactives-dev'
     }
   }
 

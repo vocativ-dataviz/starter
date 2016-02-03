@@ -5,7 +5,7 @@
   "description": "Vocativ dataviz starter/boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "init": "npm install -g coffee-script gulp stylus bower",
+    "init": "npm install -g coffee-script gulp stylus bower bower-installer",
     "bootstrap": "gulp git-reset",
     "start": "gulp",
     "github": "gulp github",
@@ -25,6 +25,7 @@
     "coffee-script": "*",
     "gulp": "*",
     "gulp-awspublish": "*",
+    "gulp-bower": "*",
     "gulp-coffee": "*",
     "gulp-coffeelint": "*",
     "gulp-concat": "*",

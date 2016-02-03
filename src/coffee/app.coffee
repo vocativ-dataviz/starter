@@ -1,5 +1,5 @@
-parentEl = 'div#vv-dataviz-starter
-'data = null
+
+data = null
 width = 0
 height = 0
 mapZoom = 0

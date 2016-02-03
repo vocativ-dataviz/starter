@@ -9,7 +9,7 @@ On OS X 10.9, aka Mavericks, be sure to have the following libraries installed:
 + [Node.js](https://nodejs.org/): JavaScript framework
 + [Gulp.js](http://gulpjs.com/): streaming build system
 + [Coffeescript](http://coffeescript.org/): JavaScript preprocessor
-+ [Stylus](https://learnboost.github.io/stylus/): CSS preprocessor
++ [Stylus](https://learnboost.github.io/styl/): CSS preprocessor
 
 Copy and paste the following code into your terminal if you're starting on a fresh machine that does not have any of those prerequisites.
 
@@ -29,35 +29,20 @@ brew install node
 + `gulp`
 + Sometimes things don't work properly the first time around, if this happens, just `gulp` again
 + **Develop**
-+ Want to show internally? `gulp github` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
-+ Ready to deploy? `gulp s3` and see it at <http://interactives.s3.amazonaws.com/NEW-PROJECT/>
++ Want to show internally? `gulp staging` and see it at <http://vocativ-dataviz.github.io/NEW-PROJECT/>
++ Ready to deploy? `gulp production` and see it at <http://interactives-dev.s3.amazonaws.com/vv/NEW-PROJECT/>
 
 ## Application structure
 This starter is a jumping-off-point for all sorts of different interactive dataviz. It tries to take care of all the things you don't want to think of so you can move quickly, but leaving enough room for anything to be possible.
 
-#### /stylus/style.styl
-The master style / CSS file is **/stylus/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file.
+#### /styl/style.styl
+The master style / CSS file is **/styl/style.styl**, all other .styl files need to be included with **@import** in style.styl to be compiled into the final style.css file.
 
-#### /mustache/partials/body.mustache
+#### /tmpl/partials/body.mustache
 This is the only HTML file you need to be modifying, in most cases.
 
 #### /coffee/app.coffee
 This is the main file for the app, where initial variables are defined, data is loaded and cleaned, and the proper chart function to visualize the data is called. 
-
-#### /coffee/templates/
-These templates are ignored by default when .coffee files are compiled into **app.js**. To use any of these templates, move them down to the **/coffee/** folder. 
-
-**app.coffee** sets up the data, and these templates define *charts.mapUSData()* or other future chart functions which visualize with that data.
-
-#### /templates/app.us-map.coffee
-+ Function defined: **charts.mapUSData()**
-If you'd like to map some data, this file defines the US map function which automatically pulls data from the **data** variable. The code will need to be modified to switch between numerical and categorical choropleth maps.
-
-## Maps
-+ You can find a template for a categorical choropleth map here: <https://docs.google.com/spreadsheets/d/1cuVwb3ufNvTNgXCXeeOXTz5NEieZOsKx0tcmE7_30EM/edit?usp=sharing>
-+ You can find a template for a global map here: <https://docs.google.com/spreadsheets/d/1oMRYb286BTn8TuHzUwtlpuBNVVF53jrhO0rE0oRbrS8/edit?usp=sharing>
-+ You can find a template to give to reporters for global maps here. **DO NOT EDIT**: <https://docs.google.com/spreadsheets/d/1p80WKmJ0H_utSGYaJPaGW8ZO2aDieBGFjYjMKBBk_5Q/edit?usp=sharing>
-+ You can find a template for a numerical choropleth map here: <https://docs.google.com/spreadsheets/d/1l9ADP29P5u93GW4L9OFLtwF44bNn_uJ7wbpq8k7Pi1Q/edit?usp=sharing>
 
 # So you wanna deploy an interactive?
 Follow this basic checklist!
@@ -74,7 +59,7 @@ Follow this basic checklist!
     - [ ] Is the post embed referencing Amazon S3 and *not GitHub*?
 - [ ] Have the analytics & testing been set up properly?
     - [ ] Is the GA UA code defined in **options.js**?
-    - [ ] Is the GA code set up properly in **mustache/partials/header.mustache**?
+    - [ ] Is the GA code set up properly in **tmpl/partials/header.mustache**?
     - [ ] Does the page emit **interactive-click** events on click?
     - [ ] Is there a function in the app to trigger **finished-interactive**?
 - [ ] Has the data been locked down?
@@ -103,13 +88,13 @@ To deploy to gh-pages, run `gulp github`
 
 To deploy to S3, run `gulp publish`
 
-The files in **/mustache/** are mustache templates/partials. The variables for those templates are defined in **/options.js**
+The files in **/tmpl/** are mustache templates/partials. The variables for those templates are defined in **/options.js**
 
 
 ## What gulpfile.coffee does
 + `gulp init`: removes **.git** and moves **PROJECT_README.md** to **README.md** to initialize a new project
-+ **/mustache/** is compiled into **/build/index.html**
-+ **/stylus/style.styl** is compiled into **build/style.css**
++ **/tmpl/** is compiled into **/build/index.html**
++ **/styl/style.styl** is compiled into **build/style.css**
 + **/coffee/** is compiled into **/build/app.js**
 + **/javascript/** is compiled into **/build/lib.js**
 + .png and .svg in **/img/** is optimized and moved to **/build/img/**
@@ -127,7 +112,7 @@ The files in **/mustache/** are mustache templates/partials. The variables for t
 
 ## Technologies / Libraries used
 + [CoffeeScript](http://coffeescript.org/)
-+ [Stylus](http://learnboost.github.io/stylus/)
++ [Stylus](http://learnboost.github.io/styl/)
 + [D3](http://d3js.org/)
 + [jQuery](http://jquery.com/)
 + [Underscore](http://underscorejs.org/)
