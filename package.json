@@ -5,11 +5,11 @@
   "description": "Vocativ dataviz starter/boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "init": "gulp git-reset",
+    "init": "npm install -g coffee-script gulp stylus bower",
+    "bootstrap": "gulp git-reset",
     "start": "gulp",
     "github": "gulp github",
-    "deploy": "gulp deploy",
-    "work": "gulp;gulp github"
+    "deploy": "gulp deploy"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "gulp-gzip": "*",
     "gulp-htmlmin": "*",
     "gulp-if": "*",
+    "gulp-insert": "*",
     "gulp-load-plugins": "*",
     "gulp-minify-css": "*",
     "gulp-mustache-plus": "*",

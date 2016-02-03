@@ -1,11 +1,9 @@
-# Init variables with defaults
-data = null
+parentEl = 'div#vv-dataviz-starter
+'data = null
 width = 0
 height = 0
 mapZoom = 0
 margin = {}
-vvSlug = 'vocatv-starter'
-parentEl = 'vv-' + vvSlug
 
 # Create a categorical scale with Vocativ's dataviz colors
 vocCatScale = d3.scale.ordinal().range(['#4f5c6d', '#77565a', '#9d5048', '#c54936','#ec4524'])

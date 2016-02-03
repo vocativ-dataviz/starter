@@ -41,8 +41,20 @@ gulp.task 'init', plugins.shell.task([
   'rm README.md',
   'mv PROJECT_README.md README.md',
   'npm install',
-  'bower install'
+  'bower install',
+  'gulp namespace'
 ])
+
+gulp.task "namespace", ->
+  stylNamespace = 'div#vv-' + options.project.slug + '\n'
+  jsNamespace = 'parentEl = \'' + stylNamespace + '\''
+  console.log('parent viz element:', stylNamespace)
+  gulp.src('./src/coffee/app.coffee')
+    .pipe plugins.insert.prepend(jsNamespace)
+    .pipe gulp.dest('./src/coffee')
+  gulp.src('./src/styl/style.styl')
+    .pipe plugins.insert.prepend(stylNamespace)
+    .pipe gulp.dest('./src/styl')
 
 # Lint coffeescript for errors
 gulp.task "lint", ->
