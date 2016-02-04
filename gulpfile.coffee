@@ -2,10 +2,10 @@
 gulp = require("gulp")
 plugins = require("gulp-load-plugins")({
   rename: {
-    'gulp-minify-css': 'mincss'
+    'gulp-awspublish': 's3',
+    'gulp-gh-pages': 'github',
+    'gulp-minify-css': 'mincss',
     'gulp-mustache-plus': 'mustache'
-    'gulp-gh-pages': 'github'
-    'gulp-awspublish': 's3'
   }
 })
 nib = require("nib")
@@ -15,7 +15,7 @@ watch = plugins.watch
 options = require("./options")
 options.prefixUrl = 'http://'+options.website.host
 if options.website.port isnt ''
-  options.prefixUrl += ':'+options.website.port
+  options.prefixUrl += ':' + options.website.port
 
 # --- Tasks --- #
 gulp.task "default", [
@@ -29,31 +29,48 @@ gulp.task "default", [
   "webserver"  
 ], -> gulp
 
-gulp.task "mirror", [
+gulp.task "staging", [
   "github"
-  "publish"
 ], -> gulp
+
+gulp.task "production", [
+  "s3"
+], ->
 
 # Remove previous git data and init fresh
 gulp.task 'init', plugins.shell.task([
   'rm -rf .git',
   'git init',
   'rm README.md',
-  'mv PROJECT_README.md README.md'
+  'mv PROJECT_README.md README.md',
+  'npm install',
+  'gulp bower',
+  'gulp namespace'
 ])
+
+gulp.task "namespace", ->
+  stylNamespace = 'div#vv-' + options.project.slug + '\n'
+  jsNamespace = 'parentEl = \'div#vv-' + options.project.slug + '\'\n'
+  console.log('parent viz element:', stylNamespace)
+  gulp.src('./src/coffee/app.coffee')
+    .pipe plugins.insert.prepend(jsNamespace)
+    .pipe gulp.dest('./src/coffee')
+  gulp.src('./src/styl/style.styl')
+    .pipe plugins.insert.append(stylNamespace)
+    .pipe gulp.dest('./src/styl')
 
 # Lint coffeescript for errors
 gulp.task "lint", ->
-  gulp.src("./source/coffee/*.coffee")
+  gulp.src("./src/coffee/*.coffee")
   .pipe plugins.coffeelint()
   .pipe plugins.coffeelint.reporter()
 
 # Compile coffeescript
 gulp.task "coffee", ["lint"], ->
-  gulp.src("./source/coffee/*.coffee")
-  #.pipe plugins.sourcemaps.init()
+  gulp.src("./src/coffee/*.coffee")
+  .pipe plugins.sourcemaps.init()
   .pipe plugins.coffee(bare: true).on('error', plugins.util.log)  
-  #.pipe plugins.sourcemaps.write()
+  .pipe plugins.sourcemaps.write()
   .pipe plugins.if(->
     if options.project.development
       plugins.util.log 'Development mode'
@@ -62,14 +79,14 @@ gulp.task "coffee", ["lint"], ->
       plugins.util.log 'Production mode'
       return true
   , plugins.uglify())
-  #.pipe plugins.uglify()
+  .pipe plugins.uglify()
   .pipe plugins.concat("app.js")  
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
 # Compile stylus to CSS
 gulp.task "stylus", ->
-  gulp.src("./source/stylus/style.styl")
+  gulp.src("./src/styl/style.styl")
   .pipe plugins.stylus(use: [nib()])
   .pipe plugins.mincss(keepBreaks: true)
   .pipe plugins.filesize()
@@ -77,11 +94,11 @@ gulp.task "stylus", ->
 
 # Compile mustache partials to HTML
 gulp.task "mustache", ->
-  gulp.src(["./source/mustache/*.mustache"])
+  gulp.src(["./src/tmpl/*.mustache"])
   .pipe(plugins.mustache(options, {},
-    header: "./source/mustache/partials/header.mustache"
-    body: "./source/mustache/partials/body.mustache"
-    footer: "./source/mustache/partials/footer.mustache"
+    header: "./src/tmpl/partials/header.mustache"
+    body: "./src/tmpl/partials/body.mustache"
+    footer: "./src/tmpl/partials/footer.mustache"
   ))
   .pipe(plugins.rename(extname: ".html"))
   .pipe(plugins.htmlmin(
@@ -93,31 +110,31 @@ gulp.task "mustache", ->
   ))
   .pipe gulp.dest("./build/")
 
+# Bower installs entire repos of js dependencies.
+# Grab only what you need
+gulp.task 'bower', ->
+  plugins.shell.task([
+    'bower install',
+    'bower-installer'
+  ])
+
 # Concat and uglify vendor JS files
 gulp.task "js", ->
-  gulp.src("./source/javascript/*.js")
+  gulp.src 'src/js/lib/**/*.js'
   .pipe plugins.concat("lib.js")
   .pipe plugins.uglify()  
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/")
 
-# Prefix link,script,img tags in HTML with full URL
-###
-gulp.task "prefix", ->
-  gulp.src("./build/*.html")
-  .pipe plugins.prefix(options.prefixUrl, null, true)
-  .pipe gulp.dest('./build/')
-###
-
 # Copy data files (CSV & JSON) from /data/ to /build/data/
 gulp.task "data", ->
-  gulp.src(["./source/data/*.csv", "./source/data/*.json"])
+  gulp.src(["./src/data/*.csv", "./src/data/*.json"])
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/data/")
 
 # Copy images (.png and .svg) from /img/ to /build/img/
 gulp.task "img", ->
-  gulp.src(["./source/img/*.svg", "./source/img/*.png"])
+  gulp.src(["./src/img/*.svg", "./src/img/*.png"])
   .pipe plugins.filesize()
   .pipe gulp.dest("./build/img/")
 
@@ -127,28 +144,43 @@ gulp.task 'github', ->
     .pipe plugins.github()
 
 # Publish to S3
+# Publish to S3
 gulp.task 's3', ->
   publisher = plugins.s3.create {
-    key: options.aws.key
-    secret: options.aws.secret
-    bucket: options.aws.bucket
+    'accessKeyId': options.aws.key
+    'secretAccessKey': options.aws.secret
+    'params': {
+      'Bucket': 'interactives-dev'
+    }
   }
 
-  headers = {
+  uploadHeaders =
     'Cache-Control': 'max-age=315360000, no-transform, public'
-  }
+
+  uploadOptions =
+    's3.path': 'vv/'
 
   gulp.src(['./build/**'])
-  .pipe plugins.rename (path) ->
-    path.dirname = '/'+options.project.slug+'/'+path.dirname+'/'
-    return path
-  #.pipe plugins.s3.gzip({ ext: '.gz' })
-  .pipe publisher.publish()
-  .pipe publisher.sync()
-  .pipe publisher.cache()
-  .pipe plugins.s3.reporter({
-    states: ['create', 'update', 'delete']
-  })
+    .pipe plugins.rename (path) ->
+      path.dirname = 'vv/' + options.project.slug + '/' + path['dirname'] + '/'
+      return path
+    .pipe publisher.publish(uploadHeaders, uploadOptions)
+    .pipe publisher.cache()
+    .pipe plugins.s3.reporter({
+      states: ['create', 'update', 'delete']
+    })
+
+# Start a local webserver for development
+gulp.task "webserver", ->
+  gulp.src("./build/")
+  .pipe plugins.webserver(
+    host: options.website.host
+    port: options.website.port
+    fallback: "build/index.html"
+    livereload: true
+    directoryListing: false
+    open: true
+  )
 
 # Start a local webserver for development
 gulp.task "webserver", ->
@@ -164,28 +196,22 @@ gulp.task "webserver", ->
 
 # Watch files for changes and livereload when detected
 gulp.task "watch", ->
-  watch "source/coffee/*.coffee", {name: 'Coffee'}, (events, done) ->
+  watch "src/coffee/*.coffee", {name: 'Coffee'}, (events, done) ->
     gulp.start "coffee"
-    done()
 
-  watch "source/stylus/*.styl", {name: 'Stylus'}, (events, done) ->
+  watch "src/styl/*.styl", {name: 'Stylus'}, (events, done) ->
    gulp.start "stylus"
-   done()
 
-  watch [ "source/mustache/*", "source/mustache/partials/*" ], {name: 'Mustache'}, (events, done) ->
+  watch [ "src/tmpl/*", "src/tmpl/partials/*" ], {name: 'Mustache'}, (events, done) ->
    gulp.start "mustache"
-   done()
 
-  watch "source/javascript/*", {name: 'Vendor JS'}, (events, done) ->
+  watch "src/js/*", {name: 'Vendor JS'}, (events, done) ->
     gulp.start "js"
-    done()
 
-  watch "source/data/*", {name: 'Data'}, (events, done) ->
+  watch "src/data/*", {name: 'Data'}, (events, done) ->
     gulp.start "data"
-    done()
 
-  watch "source/img/*", {name: 'Images'}, (events, done) ->
+  watch "src/img/*", {name: 'Images'}, (events, done) ->
     gulp.start "img"
-    done()
 
 

@@ -1,12 +1,11 @@
-$forza = 'Forza A', 'Forza B', 'Helvetica Neue', Arial, sans-serif
-$sans = 'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif
+$serif = 'Whitney SSm A', 'Whitney SSm B', 'Helvetica Neue', Helvetica, Arial, sans-serif
 
 $solido-bold = 'Solido-Bold', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif
 $solido-medium = 'Solido-Medium', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif
 $solido-light = 'Solido-Light', 'Helvetica-Neue', 'Helvetica', Arial, sans-serif
 
 /* Highlight color, when user selects text */
-$highlight = #FFF9A2
+$highlight = #d7d7d7
 
 /* Selection colours (easy to forget) */
 ::selection     {background: $highlight}
@@ -18,10 +17,10 @@ body {-webkit-tap-highlight-color: $highlight}
 em { background: rgba($highlight, 0.5) }
 
 h1,h2,h3,h4,h5
-  font-family $forza
+  font-family $solido-medium
 
 body
-  font-family $sans
+  font-family $serif
 
 /*  Typography presets
   ------------------  */
@@ -48,6 +47,8 @@ body
   font-size: 0.7em
   line-height: 1.2em
 
+header#title
+  text-align center
 
 // Font sizes for mobile
 @media only screen and (max-width: 767px)

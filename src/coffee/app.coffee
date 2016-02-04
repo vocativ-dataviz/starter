@@ -1,15 +1,12 @@
-# Init variables with defaults
+
 data = null
 width = 0
 height = 0
 mapZoom = 0
 margin = {}
-parentEl = '#viz-content'
-charts = {}
 
 # Create a categorical scale with Vocativ's dataviz colors
-vocCatScale = d3.scale.ordinal()
-.range(['#FB514E', '#2d82ca', '#49af37', '#9065c8'])
+vocCatScale = d3.scale.ordinal().range(['#4f5c6d', '#77565a', '#9d5048', '#c54936','#ec4524'])
 
 $(window).load -> onLoad()
 
@@ -21,7 +18,7 @@ onLoad = ->
 
   d3.csv 'data/DATA.csv', (csvdata) ->
     data = csvdata
-    vizData()
+    cleanData()
   ###
 
   # Load data from google sheets
@@ -33,15 +30,13 @@ onLoad = ->
       # If you have multiple worksheets, make `simpleSheet: false`
       # If simpleSheet is false, specify the sheet to use below
       #data = data['Worksheet'].elements
-
       cleanData()
-      vizData()
-      #charts.mapUSData()
   }
 
 cleanData = ->
   if data isnt null
     console.log 'Data ->', data
+    vizData()
   else
     'No data'
 
