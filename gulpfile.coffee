@@ -49,8 +49,8 @@ gulp.task 'init', plugins.shell.task([
 ])
 
 gulp.task "namespace", ->
-  stylNamespace = 'div#vv-' + options.project.slug + '\n'
-  jsNamespace = 'parentEl = \'div#vv-' + options.project.slug + '\'\n'
+  stylNamespace = 'section#vv-' + options.project.slug + '\n'
+  jsNamespace = 'parentEl = \'section#vv-' + options.project.slug + '\'\n'
   console.log('parent viz element:', stylNamespace)
   gulp.src('./src/coffee/app.coffee')
     .pipe plugins.insert.prepend(jsNamespace)
