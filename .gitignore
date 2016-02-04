@@ -1,6 +1,7 @@
 build/
 node_modules/
 src/js/[^.]*
+!src/js/lib
 .DS_Store
 options.js
 *.log
