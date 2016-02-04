@@ -112,8 +112,7 @@ gulp.task "mustache", ->
 
 # Bower installs entire repos of js dependencies.
 # Grab only what you need
-gulp.task 'bower', ->
-  plugins.shell.task([
+gulp.task 'bower', plugins.shell.task([
     'bower install',
     'bower-installer'
   ])
