@@ -22,7 +22,7 @@ brew install node
 + Clone starter `git clone https://github.com/vocativ-dataviz/starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
 + `subl options.sample.js` and **edit the project name and slug for your project**
-+ Install the core node libraries like gulp.js and coffeescript `npm init`
++ Install the core node libraries like gulp.js and coffeescript `npm run deps`
 + Then, install dependencies from package.json & bower.json and remove the starter's git history `gulp init`
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
