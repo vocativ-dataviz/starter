@@ -1,4 +1,4 @@
-var options = {
+module.exports = {
   "project": {
     "org": "Vocativ",
     "name": "Starter Project",
@@ -12,9 +12,7 @@ var options = {
   "aws": {
     "key": process.env.AWS_ACCESS_KEY_ID,
     "secret": process.env.AWS_SECRET_ACCESS_KEY,
-    "bucket": "interactives",
-    "path": "interactives"
+    "bucket": "interactives-dev",
+    "path": "vv/int/"
   }
 }
-
-module.exports = options

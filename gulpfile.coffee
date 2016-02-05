@@ -42,6 +42,7 @@ gulp.task 'init', plugins.shell.task([
   'rm -rf .git',
   'git init',
   'rm README.md',
+  'mv options.sample.js options.js'
   'mv PROJECT_README.md README.md',
   'npm install',
   'gulp bower',
