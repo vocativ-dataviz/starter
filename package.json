@@ -1,11 +1,11 @@
 {
   "name": "dataviz-starter",
-  "version": "0.0.2",
+  "version": "1.0.1",
   "private": true,
   "description": "Vocativ dataviz starter/boilerplate",
   "main": "gulpfile.js",
   "scripts": {
-    "deps": "npm install -g bower bower-installer && npm install",
+    "deps": "npm install -g bower bower-installer gulp && npm install",
     "bootstrap": "gulp git-reset",
     "start": "gulp",
     "github": "gulp github",
