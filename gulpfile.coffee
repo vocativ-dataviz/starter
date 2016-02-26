@@ -119,7 +119,7 @@ gulp.task 'bower', plugins.shell.task([
   ])
 
 # Concat and uglify vendor JS files
-gulp.task "js", ->
+gulp.task "js", ["bower"], ->
   gulp.src 'src/js/lib/**/*.js'
   .pipe plugins.concat("lib.js")
   .pipe plugins.uglify()  
