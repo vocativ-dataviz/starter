@@ -1,25 +1,13 @@
-/* Highlight color, when user selects text */
-$highlight = #d7d7d7
-
-/* Selection colours (easy to forget) */
-::selection     {background: $highlight}
-::-moz-selection  {background: $highlight}
-img::selection    {background: transparent}
-img::-moz-selection {background: transparent}
-body {-webkit-tap-highlight-color: $highlight}
-
-em { background: rgba($highlight, 0.5) }
-
 $serif = 'Georgia'
 
 // Solido-Light
 @font-face {
     font-family: 'Solido-Light';
-    src: url('/fonts/Solido-Light.eot'); /* IE9 Compat Modes */
-    src: url('/fonts/Solido-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/fonts/Solido-Light.woff') format('woff'), /* Modern Browsers */
-         url('/fonts/Solido-Light.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('/fonts/Solido-Light.svg#9c466b8e24dfbf7c8505f0e06a43f189') format('svg'); /* Legacy iOS */
+    src: url('./fonts/Solido-Light.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/Solido-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/Solido-Light.woff') format('woff'), /* Modern Browsers */
+         url('./fonts/Solido-Light.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/Solido-Light.svg#9c466b8e24dfbf7c8505f0e06a43f189') format('svg'); /* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }
@@ -27,11 +15,11 @@ $serif = 'Georgia'
 // Solido-Book
 @font-face {
     font-family: 'Solido-Book';
-    src: url('/fonts/Solido-Book.eot'); /* IE9 Compat Modes */
-    src: url('/fonts/Solido-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/fonts/Solido-Book.woff') format('woff'), /* Modern Browsers */
-         url('/fonts/Solido-Book.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('/fonts/Solido-Book.svg#d144a2467e146c3758c9f9c3dc1988ca') format('svg'); /* Legacy iOS */
+    src: url('./fonts/Solido-Book.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/Solido-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/Solido-Book.woff') format('woff'), /* Modern Browsers */
+         url('./fonts/Solido-Book.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/Solido-Book.svg#d144a2467e146c3758c9f9c3dc1988ca') format('svg'); /* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }
@@ -39,11 +27,11 @@ $serif = 'Georgia'
 // Solido-Medium
 @font-face {
     font-family: 'Solido-Medium';
-    src: url('/fonts/Solido-Medium.eot'); /* IE9 Compat Modes */
-    src: url('/fonts/Solido-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/fonts/Solido-Medium.woff') format('woff'), /* Modern Browsers */
-         url('/fonts/Solido-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('/fonts/Solido-Medium.svg#d416fb359c839ea97e3f19ca18da5251') format('svg'); /* Legacy iOS */
+    src: url('./fonts/Solido-Medium.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/Solido-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/Solido-Medium.woff') format('woff'), /* Modern Browsers */
+         url('./fonts/Solido-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/Solido-Medium.svg#d416fb359c839ea97e3f19ca18da5251') format('svg'); /* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }
@@ -51,11 +39,11 @@ $serif = 'Georgia'
 // Solido-Bold
 @font-face {
     font-family: 'Solido-Bold';
-    src: url('/fonts/Solido-Bold.eot'); /* IE9 Compat Modes */
-    src: url('/fonts/Solido-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/fonts/Solido-Bold.woff') format('woff'), /* Modern Browsers */
-         url('/fonts/Solido-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('/fonts/Solido-Bold.svg#e50f946e1d90d2f1108238db4acb85e4') format('svg'); /* Legacy iOS */
+    src: url('./fonts/Solido-Bold.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/Solido-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/Solido-Bold.woff') format('woff'), /* Modern Browsers */
+         url('./fonts/Solido-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/Solido-Bold.svg#e50f946e1d90d2f1108238db4acb85e4') format('svg'); /* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }
@@ -63,11 +51,11 @@ $serif = 'Georgia'
 // Solido-ExtraBold
 @font-face {
     font-family: 'Solido-ExtraBold';
-    src: url('/fonts/Solido-ExtraBold.eot'); /* IE9 Compat Modes */
-    src: url('/fonts/Solido-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('/fonts/Solido-ExtraBold.woff') format('woff'), /* Modern Browsers */
-         url('/fonts/Solido-ExtraBold.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('/fonts/Solido-ExtraBold.svg#decb6733308e8a62b168dfc5ddd2950d') format('svg'); /* Legacy iOS */
+    src: url('./fonts/Solido-ExtraBold.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/Solido-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/Solido-ExtraBold.woff') format('woff'), /* Modern Browsers */
+         url('./fonts/Solido-ExtraBold.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/Solido-ExtraBold.svg#decb6733308e8a62b168dfc5ddd2950d') format('svg'); /* Legacy iOS */
     font-weight: normal;
     font-style: normal;
 }
