@@ -8,7 +8,6 @@ On OS X 10.9, aka Mavericks, be sure to have the following libraries installed:
 + [Homebrew](http://brew.sh/): OS X package manager
 + [Node.js](https://nodejs.org/): JavaScript framework
 + [Gulp.js](http://gulpjs.com/): streaming build system
-+ [Coffeescript](http://coffeescript.org/): JavaScript preprocessor
 + [Stylus](https://learnboost.github.io/styl/): CSS preprocessor
 
 Copy and paste the following code into your terminal if you're starting on a fresh machine that does not have any of those prerequisites.
@@ -22,7 +21,7 @@ brew install node
 + Clone starter `git clone https://github.com/vocativ-dataviz/starter.git NEW-PROJECT`
 + Go to it `cd NEW-PROJECT`
 + `subl options.sample.js` and **edit the project name and slug for your project**
-+ Install the core node libraries like gulp.js and coffeescript `npm run deps`
++ Install the core node libraries like gulp.js `npm run deps`
 + Then, install dependencies from package.json & bower.json and remove the starter's git history `gulp init`
 + Create new repo in GitHub web app
 + Add repo in GitHub desktop app, add GitHub URL as remote
@@ -41,7 +40,7 @@ The master style / CSS file is **/styl/style.styl**, all other .styl files need 
 #### /tmpl/partials/body.mustache
 This is the only HTML file you need to be modifying, in most cases.
 
-#### /coffee/app.coffee
+#### /app/app.js
 This is the main file for the app, where initial variables are defined, data is loaded and cleaned, and the proper chart function to visualize the data is called. 
 
 # So you wanna deploy an interactive?
@@ -82,7 +81,7 @@ Follow this basic checklist!
 ## Use
 First `npm install` or perhaps `sudo npm install`
 
-To run **/gulpfile.coffee** for development, from the root of the project use `npm start` or `gulp`
+To run **/gulpfile.js** for development, from the root of the project use `npm start` or `gulp`
 
 To deploy to gh-pages, run `gulp github`
 
@@ -91,11 +90,10 @@ To deploy to S3, run `gulp publish`
 The files in **/tmpl/** are mustache templates/partials. The variables for those templates are defined in **/options.js**
 
 
-## What gulpfile.coffee does
+## What gulpfile.js does
 + `gulp init`: removes **.git** and moves **PROJECT_README.md** to **README.md** to initialize a new project
 + **/tmpl/** is compiled into **/build/index.html**
 + **/styl/style.styl** is compiled into **build/style.css**
-+ **/coffee/** is compiled into **/build/app.js**
 + **/javascript/** is compiled into **/build/lib.js**
 + .png and .svg in **/img/** is optimized and moved to **/build/img/**
 + .json and .csv in **/data/** is moved to **/build/data/**
@@ -111,7 +109,6 @@ The files in **/tmpl/** are mustache templates/partials. The variables for those
 [Found in Package.json](https://github.com/vocativ-dataviz/starter/blob/master/package.json)
 
 ## Technologies / Libraries used
-+ [CoffeeScript](http://coffeescript.org/)
 + [Stylus](http://learnboost.github.io/styl/)
 + [D3](http://d3js.org/)
 + [jQuery](http://jquery.com/)

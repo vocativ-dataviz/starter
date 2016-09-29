@@ -5,7 +5,7 @@ Description of what this repo/project is to be used for
 `gulp s3` will push **/build/** to S3
 
 # How to develop
-`gulp` will compile coffeescript, stylus, etc and run local webserver
+`gulp` will compile stylus, etc and run local webserver
 
 # Deployment checklist
 ## So you wanna deploy an interactive?
