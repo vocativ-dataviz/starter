@@ -1,8 +1,9 @@
 module.exports = {
   "project": {
     "org": "Vocativ",
-    "name": "Starter Project",
-    "slug": "dataviz-starter"
+    "name": "",
+    "slug": "",
+    "description": "",
   },
   "website": {
     "host": "localhost",
@@ -12,7 +13,7 @@ module.exports = {
   "aws": {
     "key": process.env.AWS_ACCESS_KEY_ID,
     "secret": process.env.AWS_SECRET_ACCESS_KEY,
-    "bucket": "interactives-dev",
-    "path": "vv/int/"
+    "bucket": "interactives",
+    "path": "interactives/"
   }
 }
